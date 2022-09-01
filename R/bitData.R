@@ -1,0 +1,39 @@
+#' bitData
+#'
+#' @name bitData
+#' @docType package
+#' @import dplyr tibble purrr tidyr readr jsonlite
+NULL
+
+#' @title 국방부 공군 남녀 신체측정 데이터
+#' @description 공군 장병 초도 보급을 위한 3차원 전신스캐너 운영에 따른 계측값 데이터. 1년동안 운영된 체형측정정보이며 3차원 스캐너의 정확성의 부족으로 실제 개인의 인체 정보와는 다소 차이가 존재함.
+#' @format 22개 측정변수와 남녀 총 834명을 측정한 데이터프레임
+#' \describe{
+#'   \item{\code{성별}}{factor 성별 (남, 여)}
+#'   \item{\code{측정일자}}{double 측정일자}
+#'   \item{\code{키}}{double 키 cm}
+#'   \item{\code{몸무게}}{double 몸무게 kg}
+#'   \item{\code{머리둘레}}{double 머리둘레}
+#'   \item{\code{희망치수머리}}{double 희망치수머리}
+#'   \item{\code{목둘레}}{double 목둘레}
+#'   \item{\code{화장}}{double 화장}
+#'   \item{\code{젖가슴둘레}}{double 젖가슴둘레}
+#'   \item{\code{배꼽수준허리둘레}}{double 배꼽수준허리둘레}
+#'   \item{\code{엉덩이둘레}}{double 엉덩이둘레}
+#'   \item{\code{샅높이}}{double 샅높이}
+#'   \item{\code{발길이}}{double 발길이}
+#'   \item{\code{발폭}}{double 발폭}
+#'   \item{\code{희망치수신발}}{double 희망치수신발}
+#'   \item{\code{윗가슴둘레_겨드랑이}}{double 윗가슴둘레_겨드랑이}
+#'   \item{\code{허리둘레_윗허리}}{double 허리둘레_윗허리}
+#'   \item{\code{어깨가쪽사이길이}}{double 어깨가쪽사이길이}
+#'   \item{\code{팔길이}}{double 팔길이}
+#'   \item{\code{등길이}}{double 등길이}
+#'   \item{\code{다리가쪽길이}}{double 다리가쪽길이}
+#'   \item{\code{총장}}{double 총장}
+#'}
+#' @details 공공데이터포털 국방부 공군 남녀 신체측정정보로 육군 신체측정정보도 있음.
+#' @source \url{https://www.data.go.kr/data/15090354/fileData.do}
+#' @source \url{https://www.data.go.kr/data/15090359/fileData.do}
+"airforce"
+
