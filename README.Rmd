@@ -1,0 +1,89 @@
+---
+output: github_document
+editor_options: 
+  chunk_output_type: console
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "75%",
+  warning = FALSE,
+  message = FALSE,
+  fig.retina = 2,
+  fig.align = 'center'
+)
+library(tidyverse)
+library(palmerpenguins)
+```
+
+
+# bitData <a href='https://bit2r.github.io/bitData/'><img src="man/figures/logo.png" align="right" height="134" /></a>
+
+
+`bitData` 데이터 패키지의 목표는 통계 대중화와 디지털 불평등 해소를 위해서 누구나 쉽게 즉시 사용할 수 있는 통계, 데이터 과학, 기계학습, 딥러닝에 사용될 데이터셋을 모아 제공하는 것입니다.
+
+## 설치방법
+
+[GitHub](https://github.com/)에 `bitData` 데이터 패키지 관련 소스코드와 원천 데이터를 포함한 모든 정보가 저장되어 있습니다. 다음 명령어를 사용해서 데이터셋을 설치하여 즉시 사용할 수 있습니다.
+
+``` r
+# install.packages("remotes")
+remotes::install_github("bit2r/bitData")
+```
+
+## 데이터셋
+
+한국인이면 누구나 체감할 수 있는 직관적이고 현실감있는 데이터를 모아 제공하고 있고 `bitData` 데이터 패키지 설치 후 다음 명령어를 통해서 즉시 사용할 수 있습니다.
+
+```{r showdata}
+library(bitData)
+# data(package = 'bitData')
+
+bitData_list <- data(package = 'bitData')
+bitData_list$results %>%
+  as_tibble() %>%
+  select(Item, Title)
+``` 
+
+### 남극 팔머 펭귄
+
+붓꽃 데이터(Iris Data) 를 대신해 시각화와 데이터 과학, 기계학습에 전세계적으로 많이 사용되고 있는 데이터셋으로 파머 펭귄(Palmer Penguins) 데이터셋을 번역하여 순 한글로 제공된다.
+
+```{r example-penguins}
+head(penguins)
+```
+
+
+### 공군 신체정보
+
+대한민국 공군 남녀 신체정보를 공공데이터 포털에서 다운로드 받아 분석이 가능한 형태로 데이터가 결측값을 제거하여 정제했다.
+
+```{r example-airforce}
+head(airforce)
+```
+
+## 라이선스
+
+`bitData` 데이터와 저작물을 포함한 
+한국 알(R) 사용자회 저작물은 크리에이티브 커먼즈 
+[저작자표시-비영리-동일조건 변경 허락 (BY-NC-SA)](http://ccl.cckorea.org/about/)
+라이선스를 준용하고 있습니다. 
+
+
+## 도움요청
+
+bitData의 발전을 위해서 버그에 대한 리포팅, 기능 개선을 위한 요구사항들은 <a href="https://github.com/bit2r/bitData/issues"
+target="_blank">여기에</a>에 문제를 제기하거나 요청해주세요. 특히 버그는 최소한의 재현 가능한 예제와 함께 제출바랍니다.
+
+## 행동강령 (Code of Conduct)
+
+`hsData`프로젝트는 [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html)을 따르고 있습니다. 따라서, `hsData`프로젝트 기여함은 해당 조항을 준수하는데 동의하는 것입니다.
+
+
+
+

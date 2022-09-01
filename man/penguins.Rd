@@ -3,19 +3,9 @@
 \docType{data}
 \name{penguins}
 \alias{penguins}
-\title{남극 파머 연구소 근처 야생 성인 펭귄 신체측정 데이터}
+\title{남극 파머 연구소 인근 펭귄 측정 데이터}
 \format{
-333개 펭귄 개체수로부터 측정된 8개 변수를 갖는 데이터프레임
-\describe{
-\item{\code{종명칭}}{factor 펭귄종 명칭 ("아델리", "젠투", "턱끈")}
-\item{\code{섬이름}}{factor 남극 파머 제도 섬이름 ("드림", "비스코", "토르거센")}
-\item{\code{부리_길이}}{double 부리 길이 (밀리미터)}
-\item{\code{부리_깊이}}{double 부리 깊이 (밀리미터)}
-\item{\code{물갈퀴_길이}}{integer 물갈퀴 길이 (밀리미터)}
-\item{\code{체중}}{integer 체중 (그램)}
-\item{\code{성별}}{factor 성별 (수컷, 암컷)}
-\item{\code{연도}}{integer 측정 연도 (2007, 2008, or 2009)}
-}
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 333 rows and 8 columns.
 }
 \source{
 {Horst AM, Hill AP, Gorman KB (2020). palmerpenguins: Palmer Archipelago (Antarctica) penguin data. R package version 0.1.0.} \doi{10.5281/zenodo.3960218}
@@ -34,7 +24,20 @@
 penguins
 }
 \description{
+남극 파머 연구소 인근 서식하고 있는 성체 펭귄을 관측한 데이터로
 펭귄종, 파머 제도 서식섬, 측정크기(물갈퀴 길이, 체중, 부리 길이와 깊이), 성별에
 대한 정보가 포함되어 있다.
+}
+\details{
+\describe{
+\item{\code{종명칭}}{factor 펭귄종 명칭 ("아델리", "젠투", "턱끈")}
+\item{\code{섬이름}}{factor 남극 파머 제도 섬이름 ("드림", "비스코", "토르거센")}
+\item{\code{부리_길이}}{double 부리 길이 (밀리미터)}
+\item{\code{부리_깊이}}{double 부리 깊이 (밀리미터)}
+\item{\code{물갈퀴_길이}}{integer 물갈퀴 길이 (밀리미터)}
+\item{\code{체중}}{integer 체중 (그램)}
+\item{\code{성별}}{factor 성별 (수컷, 암컷)}
+\item{\code{연도}}{integer 측정 연도 (2007, 2008, or 2009)}
+}
 }
 \keyword{datasets}
