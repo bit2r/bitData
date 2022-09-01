@@ -80,3 +80,23 @@ head(airforce)
 #> #   다리가쪽길이 <dbl>, 총장 <dbl>, and abbreviated variable names
 #> #   ¹​희망치수머리, ²​젖가슴둘레, ³​배꼽수준허리둘레
 ```
+
+## 라이선스
+
+`bitData` 데이터와 저작물을 포함한 한국 알(R) 사용자회 저작물은
+크리에이티브 커먼즈 [저작자표시-비영리-동일조건 변경 허락
+(BY-NC-SA)](http://ccl.cckorea.org/about/) 라이선스를 준용하고 있습니다.
+
+## 도움요청
+
+bitData의 발전을 위해서 버그에 대한 리포팅, 기능 개선을 위한
+요구사항들은 <a href="https://github.com/bit2r/bitData/issues"
+target="_blank">여기에</a>에 문제를 제기하거나 요청해주세요. 특히 버그는
+최소한의 재현 가능한 예제와 함께 제출바랍니다.
+
+## 행동강령 (Code of Conduct)
+
+`hsData`프로젝트는 [Contributor Code of
+Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html)을
+따르고 있습니다. 따라서, `hsData`프로젝트 기여함은 해당 조항을
+준수하는데 동의하는 것입니다.
