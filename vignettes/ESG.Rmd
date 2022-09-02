@@ -33,7 +33,7 @@ bitData_list$results %>%
   as_tibble() %>%
   select(Item, Title) %>% 
   janitor::clean_names() %>% 
-  filter(str_detect(title, "온실가스|대기오염"))
+  filter(str_detect(title, "온실가스|대기오염|강수"))
 ``` 
 
 

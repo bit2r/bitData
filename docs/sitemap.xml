@@ -45,4 +45,13 @@
   <url>
     <loc>/reference/population.html</loc>
   </url>
+  <url>
+    <loc>/reference/pr_day.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pr_hour.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pr_month.html</loc>
+  </url>
 </urlset>
