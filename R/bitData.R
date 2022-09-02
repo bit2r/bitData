@@ -61,3 +61,38 @@ NULL
 #' @source {Chinstrap penguins: Palmer Station Antarctica LTER and K. Gorman. 2020. Structural size measurements and isotopic signatures of foraging among adult male and female Chinstrap penguin (Pygoscelis antarcticus) nesting along the Palmer Archipelago near Palmer Station, 2007-2009 ver 6. Environmental Data Initiative.} \doi{10.6073/pasta/c14dfcfada8ea13a17536e73eb6fbe9e}
 #' @source {Originally published in: Gorman KB, Williams TD, Fraser WR (2014) Ecological Sexual Dimorphism and Environmental Variability within a Community of Antarctic Penguins (Genus Pygoscelis). PLoS ONE 9(3): e90081. doi:10.1371/journal.pone.0090081}
 "penguins"
+
+#' @title 대한민국 인구 데이터
+#' @description 1981년 이후 연도별 총인구수와 출생아수와 사망자수를 담은 데이터셋
+#' @format 관측점으로 총 41년, 변수로 4개를 갖는 데이터프에임:
+#' \describe{
+#'   \item{\code{시점}}{integer 시점, 연도 1년 단위}
+#'   \item{\code{총인구}}{double 총인구, 단위 (명)}
+#'   \item{\code{출생아수}}{double 출생아수, 단위 (명)}
+#'   \item{\code{사망자수}}{integer 사망자수, 단위 (명)}
+#'}
+#' @details KOSIS로부터 통계청 "장래인구추계" 주요인구지표 및 인구동향조사 통계표를 근간으로 제작됨.
+#' @source \url{https://kosis.kr/statHtml/statHtml.do?orgId=101&tblId=DT_1B8000G&conn_path=I3}
+#' @source \url{https://kosis.kr/statHtml/statHtml.do?orgId=101&tblId=DT_1BPA002&conn_path=I3}
+"population"
+
+#' @title 국가 온실가스 종류별 배출량
+#' @description 환경부 온실가스종합정보센터 (국가 온실가스 인벤토리 보고서)에서
+#' @format A data frame with 30 rows and 10 variables:
+#' \describe{
+#'   \item{\code{시점}}{integer 시점 1년 단위 연도}
+#'   \item{\code{총배출량}}{double 총배출량, 단위: 백만tCO₂}
+#'   \item{\code{순배출량}}{double 순배출량, 단위: 백만tCO₂}
+#'   \item{\code{CO2}}{double CO2, 이산화탄소}
+#'   \item{\code{CH4}}{double CH4, 메테인}
+#'   \item{\code{N2O}}{double N2O, 이산화질수}
+#'   \item{\code{HFCs}}{double HFCs, (에어컨 냉매) 수소불화탄소}
+#'   \item{\code{PFCs}}{character (오존층 파괴) 과불화탄소}
+#'   \item{\code{SF6}}{double SF6, 육불화황}
+#'   \item{\code{LULUCF}}{double 토지이용, 토지이용 변화 및 임업(LULUCF: Land Use, Land Use Change and Forestry)}
+#'}
+#' @details 저탄소 녹색성장 기본법(제45조)에 따라 매년 국가 온실가스 통계 관리위원회 심의를 거쳐 공표하고 있는 통계표로 KOSIS에서 출처(환경부 온실가스종합정보센터, 국가 온실가스 인벤토리 보고서)를 밝히고 통계표로 제공되고 있다.
+#' @source \url{https://kosis.kr/statHtml/statHtml.do?orgId=106&tblId=DT_106N_99_2800021&conn_path=I3}
+"co2"
+
+

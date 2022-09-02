@@ -22,6 +22,9 @@
     <loc>/reference/clean_varnames.html</loc>
   </url>
   <url>
+    <loc>/reference/co2.html</loc>
+  </url>
+  <url>
     <loc>/reference/index.html</loc>
   </url>
   <url>
@@ -29,5 +32,8 @@
   </url>
   <url>
     <loc>/reference/penguins.html</loc>
+  </url>
+  <url>
+    <loc>/reference/population.html</loc>
   </url>
 </urlset>
