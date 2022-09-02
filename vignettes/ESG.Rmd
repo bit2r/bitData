@@ -1,0 +1,40 @@
+---
+title: "기후위기"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{기후위기}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE,
+                      comment = "#>", 
+                      digits = 3, tidy = FALSE, prompt = FALSE, fig.align = 'center')
+
+```
+
+```{r setup}
+library(bitData)
+```
+
+## 데이터셋
+
+최근들어 지구온난화에 따라 가뭄과 홍수가 빈번히 전세계적으로 일어나고 있다. 지구온난화와 관련이 있는 데이터셋이 `bitData`에 다음이 포함되어 있다.
+
+```{r esg-showdata}
+library(bitData)
+library(tidyverse)
+
+bitData_list <- data(package = 'bitData')
+bitData_list$results %>%
+  as_tibble() %>%
+  select(Item, Title) %>% 
+  janitor::clean_names() %>% 
+  filter(str_detect(title, "온실가스|대기오염"))
+``` 
+
+
+

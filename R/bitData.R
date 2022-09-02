@@ -95,4 +95,23 @@ NULL
 #' @source \url{https://kosis.kr/statHtml/statHtml.do?orgId=106&tblId=DT_106N_99_2800021&conn_path=I3}
 "co2"
 
+#' @title 전국 대기오염물질 배출량
+#' @description 환경부 국가미세먼지정보센터 배출량조사팀에서 연도별로 제공하는 시도별 대기오염물질 배출량
+#' @format 350개 행과 11개 변수를 갖는 데이터프레임
+#' \describe{
+#'   \item{\code{시도}}{integer 시도}
+#'   \item{\code{연도}}{integer 연도}
+#'   \item{\code{일산화탄소}}{double 일산화탄소, CO2}
+#'   \item{\code{질소산화물}}{double 질소산화물, NOx}
+#'   \item{\code{황산화물}}{double 황산화물, SOx}
+#'   \item{\code{총부유먼지}}{double 총부유먼지, TSP}
+#'   \item{\code{미세먼지}}{double 미세먼지, PM-10}
+#'   \item{\code{초미세먼지}}{character 초미세먼지, PM-2.5}
+#'   \item{\code{블랙카본}}{character 블랙카본, BC}
+#'   \item{\code{휘발성유기화합물}}{double 휘발성유기화합물, VOCs}
+#'   \item{\code{암모니아}}{double 암모니아, NH3}
+#'}
+#' @details KOSIS 전국 대기오염물질 배출량으로 해상선박 일부는 바다로 구분되고 비산먼지 및 생물성 연소 부문 배출량 포함.
+#' @source \url{https://kosis.kr/statHtml/statHtml.do?orgId=106&tblId=DT_106N_03_0100007&conn_path=I3}
+"pollution"
 
