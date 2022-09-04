@@ -1,0 +1,62 @@
+---
+title: "반도체 칩"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{chips}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE,
+                      comment = "#>", 
+                      digits = 3, tidy = FALSE, 
+                      prompt = FALSE, fig.align = 'center')
+
+```
+
+# 반도체칩 시각화
+
+- 데이터 시각화 코드 출처: <https://github.com/masbury/TidyTuesday>
+- 원데이터 출처: <https://chip-dataset.vercel.app/>
+- 요약데이터 출처: <https://github.com/rfordatascience/tidytuesday/tree/master/data/2022/2022-08-23>
+
+```{r chips-tidytuesday, eval = FALSE}
+
+extrafont::loadfonts()
+
+chips_g <- chips %>% 
+  ggplot(aes(출시연도, log(트랜지스터수), colour=공급사))+
+    geom_point(data= ~ subset(., select=-c(공급사, 유형)), colour="grey85")+
+    geom_point(alpha=0.6) +
+    geom_smooth(se=FALSE, span=1.5) +
+    facet_grid(공급사~유형) +
+    labs( x = "연도",
+          y = "트랜지스터 수 \n(백만 로그)",
+          title = "무어의 법칙",
+          subtitle = "무어의 법칙은 반도체 트랜지스터 수가 거의 2년마다 두배로 집적된다는 것이다.", 
+         caption="데이터출처: https://chip-dataset.vercel.app/") +
+      scale_colour_manual(values=c("#4ba6c9", "#5b8fc6", "#7b75b4", "#935891", "#9b3e63"))+
+    theme_bw( base_family = "MaruBuri")+
+    theme(panel.grid.minor = element_blank(),
+          legend.position = "none",
+          axis.title = element_text(face="bold", size=12),
+          strip.text = element_text(size=9), 
+          strip.background = element_blank(),
+          plot.background = element_rect(fill="grey95"),
+          plot.title = element_text(size=18),
+          plot.subtitle = element_text(size=10))
+
+ggsave( glue::glue("{here::here()}/man/figures/chips_g.png") , 
+        chips_g,
+        device = ragg::agg_png, 
+        width = 297, height = 210, units = "mm", res = 600, scaling = 0.75)
+```
+
+
+```{r out.width='100%'}
+knitr::include_graphics(glue::glue("{here::here()}/man/figures/chips_g.png"))
+```
+
