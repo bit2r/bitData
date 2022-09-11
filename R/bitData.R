@@ -154,4 +154,16 @@ NULL
 #' @source \url{https://data.kma.go.kr/data/grnd/selectAwsRltmList.do?pgmNo=56}
 "pr_month"
 
+#' @title 대기 이산화탄소 추세
+#' @description 미국 해양대기청(NOAA)에서 하와이 마우나로아(Mauna Loa)산에서 측정한 대기중 이산화탄소 농도 추세
+#' @format 변수 2개와 63개 관측점으로 구성된 데이터프레임:
+#' \describe{
+#'   \item{\code{year}}{double 연도 (1959~2021) }
+#'   \item{\code{mean}}{double 이산화탄소 농도 WMO 척도 }
+#'}
+#' @details Global Monitoring Laboratory 웹사이트에서 지구온난화에 따른 이산화탄소 추세를 공개하고 있는 데이터셋.
+#' @source Trends in Atmospheric Carbon Dioxide \url{https://gml.noaa.gov/ccgg/trends/data.html}
+#' @source Carbon Dioxide (CO2) WMO Scale \url{https://gml.noaa.gov/ccl/co2_scale.html}
+"global_co2"
+
 
