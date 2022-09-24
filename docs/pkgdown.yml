@@ -4,5 +4,6 @@ pkgdown_sha: ~
 articles:
   ESG: ESG.html
   chips: chips.html
-last_built: 2022-09-24T07:19Z
+  exam_score: exam_score.html
+last_built: 2022-09-24T07:47Z
 

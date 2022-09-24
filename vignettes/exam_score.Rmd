@@ -1,0 +1,75 @@
+---
+title: "영어작문 성적"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{영어작문 성적}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(bitData)
+library(tidyverse)
+```
+
+# 데이터 살펴보기
+
+```{r}
+exam_score %>% 
+  skimr::skim()
+```
+
+# 탐색적 데이터 분석
+
+```{r}
+exam_score <- exam_score %>% 
+  mutate(total = attendance + participation + homework + midterm + final) %>% 
+  mutate(grade = case_when( total > 90 ~ "A",
+                            total > 80 & total <= 90 ~ "B",
+                            total > 70 & total <= 80 ~ "C",
+                            total > 60 & total <= 70 ~ "D",
+                            TRUE ~ "F"))
+```
+
+```{r}
+exam_score %>% 
+  ggplot(aes(x = grade, y = total)) +
+    geom_boxplot() +
+    facet_wrap(~department) +
+    labs( title = "학과별 학점 분포",
+          x = "학점",
+          y = "총점") +
+    theme_bw(base_family = "AppleGothic")
+```
+
+
+```{r}
+two_grades <- exam_score %>% 
+ filter(grade %in% c("A", "F"))
+
+two_grades %>% 
+  count(grade)
+```
+
+```{r}
+two_grades %>% 
+  pivot_longer(cols = attendance:final, 
+               names_to = "구분",
+               values_to = "점수") %>% 
+  group_by(grade, 구분) %>% 
+  summarise(평균 = mean(점수)) %>% 
+  ggplot(aes(x = grade, y = 평균, fill = 구분)) +
+     geom_col(position = "fill") +
+     theme_bw(base_family = "AppleGothic") +
+     labs(title = "A와 F 학생 평균 비교")
+```
+
