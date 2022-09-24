@@ -4,10 +4,13 @@
     <loc>/404.html</loc>
   </url>
   <url>
-    <loc>/articles/chips.html</loc>
+    <loc>/LICENSE.html</loc>
   </url>
   <url>
     <loc>/articles/ESG.html</loc>
+  </url>
+  <url>
+    <loc>/articles/chips.html</loc>
   </url>
   <url>
     <loc>/articles/index.html</loc>
@@ -17,9 +20,6 @@
   </url>
   <url>
     <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE.html</loc>
   </url>
   <url>
     <loc>/reference/airforce.html</loc>
@@ -32,6 +32,9 @@
   </url>
   <url>
     <loc>/reference/co2.html</loc>
+  </url>
+  <url>
+    <loc>/reference/exam_score.html</loc>
   </url>
   <url>
     <loc>/reference/global_co2.html</loc>
