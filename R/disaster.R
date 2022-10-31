@@ -43,7 +43,7 @@ preside_14_tbl <- preside_14_raw %>%
 
 preside_14_tbl
 
-## 2.2. 사고공화국(김영삼) -------------
+## 2.2. 서울경제 -------------
 # https://www.sedaily.com/NewsView/26CJW8PC06
 
 library(DataEditR)
@@ -78,7 +78,7 @@ nature_tbl <- nature_raw %>%
 nature_tbl
 
 ## 2.4. 해럴드경제 뉴스(2014) -------------
-# https://www.mois.go.kr/frt/bbs/type001/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000014&nttId=89542
+# http://news.heraldcorp.com/view.php?ud=20140417000274
 
 herald_raw <- read_lines("data-raw/herald_news_disaster.txt")
 

@@ -1,0 +1,250 @@
+---
+title: "대한민국 자연재해와 참사"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{참사}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+theme_election <- function(..., font = "MaruBuri") {
+  
+  theme_bw(base_family = font)  %+replace%
+    
+    theme(
+      
+      plot.margin = margin(1,1,1,1, "cm"),
+      
+      #grid elements
+      panel.grid.major.x = element_line(color='gray75'),
+      panel.grid.minor.x = element_blank(),
+      # axis.ticks = element_blank(),          #strip axis ticks
+      
+      #since theme_minimal() already strips axis lines, 
+      #we don't need to do that again
+      
+      #text elements
+      plot.title = element_text(             #title
+        family = font,            #set font family
+        size = 23,                #set font size
+        face = 'bold',            #bold typeface
+        hjust = 0,                #left align
+        vjust = 2),               #raise slightly
+      
+      plot.subtitle = element_text(          #subtitle
+        family = font,            #font family
+        hjust = 0,                #left align        
+        size = 17),               #font size
+      
+      plot.caption = element_text(           #caption
+        family = font,            #font family
+        size = 12,                 #font size
+        hjust = 1),               #right align
+      
+      axis.title = element_text(             #axis titles
+        family = font,            #font family
+        size = 15),               #font size
+      
+      axis.title.x = element_text(
+        vjust = 3
+      ),
+      
+      axis.text.x = element_text(            #margin for axis text
+        # margin = margin(5, b = 10),
+        # margin = margin(0,0,-5,-5),
+        size = rel(1.5),
+        family = font, face="bold"),
+      
+      axis.ticks.length=unit(.25, "cm"),
+      
+      axis.text.y = element_text(
+        size = rel(1.5),
+        colour = "gray35", 
+        family = font, face="bold"),
+      
+      strip.text.x = element_text(
+        size = rel(1.5), 
+        colour = "black", family = font, face="bold" ),
+      
+      strip.background = element_rect(fill="gray95"),
+      
+      legend.position = "top",
+      legend.title=element_text(size=12),
+      legend.text=element_text(size=10)
+    )
+}
+
+```
+
+
+
+# 태풍 
+
+천재의 대표적인 사례로 대한민국에서는 태풍이 꼽히고 있다. 지구 온난화의 영향으로 갈수록 태풍이 강해지고 있음에도 불구하고 사망자수는 지속적으로 줄어들고 있어 태풍과 같은 자연재해에 대해 안전이 강화되고 있는 것이 데이터를 통해 확인되고 있다.
+
+
+```{r}
+library(tidyverse)
+library(rvest)
+library(ggrepel)
+extrafont::loadfonts()
+
+typoon_raw <- read_html("https://namu.wiki/w/%ED%83%9C%ED%92%8D/%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD/%EA%B0%81%EC%A2%85%20%EA%B8%B0%EB%A1%9D%20%EC%88%9C%EC%9C%84",
+                        encoding = 'utf-8') %>%
+  html_elements('table')
+
+typoon_tbl <- typoon_raw %>%
+  html_table() %>%
+  .[[1]] %>%
+  slice(3:n()) %>%
+  mutate(시작일 = lubridate::ymd(X2),
+         종료일 = lubridate::ymd(X3),
+         사망   = parse_number(X5)) %>%
+  select(시작일, 종료일, 사망, 태풍명 = X4) %>%
+  mutate(기간 = lubridate::interval(시작일, 종료일)) %>%
+  mutate(지속일수 = lubridate::as.duration(기간) %>% as.numeric("days")) %>%
+  select(-기간)
+
+typoon_g <- typoon_tbl %>% 
+  ggplot(aes(x = 시작일, y = 사망)) +
+    geom_line() +
+    geom_point(size = 3) +
+    expand_limits(y = c(0, 1300)) +
+    geom_label_repel(aes(label = glue::glue("{태풍명}:{사망}명")),
+                     label.size = NA) +
+    scale_y_continuous(labels = scales::comma) +
+    labs(x = "", y = "사망 실종자(명)",
+         title = "태풍으로 인한 인명피해",
+         caption = "자료출처: 나무위키 태풍/대한민국/각종 기록 순위") +
+    theme_election()
+    
+ggsave( glue::glue("inst/extdata/figure/typoon.png") , 
+      typoon_g,
+      device = ragg::agg_png, 
+      width = 250, height = 176, units = "mm", res = 600) 
+
+```
+
+
+# 인재 
+
+[서울경제](https://www.sedaily.com/NewsView/26CJW8PC06), [헤럴드경제](http://news.heraldcorp.com/view.php?ud=20140417000274) 뉴스기사로 실린 통계자료를 결합하여 1950년 이후 대규모 참사에 대한 데이터를 생성한다.
+
+
+```{r}
+## 해럴드경제 뉴스(2014)
+# http://news.heraldcorp.com/view.php?ud=20140417000274
+herald_raw <- read_lines("data-raw/herald_news_disaster.txt")
+
+herald_tbl <- herald_raw %>%
+  as_tibble() %>%
+  slice(2:n()) %>%
+  mutate(날짜 = str_extract(value,
+                          pattern = "\\d{4}년\\s?\\d{1,2}월\\s?\\d{1,2}일") %>%
+           lubridate::ymd(.)) %>%
+  mutate(사망 = str_extract(value, pattern = "\\d{1,4}명$") %>%
+           parse_number(.)) %>%
+  mutate(참사내역 = str_remove(value, pattern = "\\d{1,4}명$") %>%
+           str_remove(pattern = "\\d{4}년\\s?\\d{1,2}월\\s?\\d{1,2}일") %>%
+           str_trim(.)) %>%
+  select(날짜, 사망, 참사내역)
+
+herald_tbl
+
+## 서울경제
+# https://www.sedaily.com/NewsView/26CJW8PC06
+big_disaster_raw <- tribble(
+~"날짜",~"사망",~"부상",~"참사내역",
+"1994-10-21",32,17,"성수대교 붕괴",
+"1995-06-29",502,937,"삼풍백화점 붕괴",
+"2003-02-18",192,151,"대구 지하철 방화",
+"2014-04-16",299,5,"세월호 침몰",
+"2022-10-29",154,132,"이태원 압사")
+
+big_disaster <- big_disaster_raw %>%
+  mutate(날짜 = lubridate::ymd(날짜))
+
+# big_disaster
+
+disaster_tbl <- big_disaster %>% 
+  filter(날짜 >= as.Date("2014-01-01")) %>% 
+  bind_rows(herald_tbl) %>% 
+  select(-부상) %>% 
+  arrange(날짜)
+
+disaster_tbl
+```
+
+
+```{r}
+library(lubridate)
+## 대통령 재임기간
+president <- tribble(~"이름", ~"시작일", ~"종료일",
+                     "이승만", "1948-08-15", "1960-04-26",
+                     "윤보선", "1960-08-02", "1962-03-23",
+                     "박정희", "1963-12-17", "1979-10-26",
+                     "최규하", "1979-12-06", "1980-08-16",
+                     "전두환", "1980-09-01", "1988-02-24",
+                     "노태우", "1988-02-25", "1993-02-24",
+                     "김영삼", "1993-02-25", "1998-02-24",
+                     "김대중", "1998-02-25", "2003-02-24",
+                     "노무현", "2003-02-25", "2008-02-24",
+                     "이명박", "2008-02-25", "2013-02-24",
+                     "박근혜", "2013-02-25", "2016-12-09",
+                     "문재인", "2017-05-10", "2022-05-09",
+                     "윤석열", "2022-05-10", "2022-10-31")
+
+president_tbl <- president %>% 
+  mutate(`시작일` = lubridate::ymd(`시작일`),
+         `종료일` = lubridate::ymd(`종료일`)) %>% 
+  mutate(임기 = lubridate::interval(시작일, 종료일))
+  
+
+president_disaster <- president_tbl %>% 
+  group_by(이름) %>% 
+  mutate(재난횟수 = sum(disaster_tbl$날짜 %within% 임기)) %>% 
+  ungroup() %>% 
+  mutate(재임기간 = lubridate::as.duration(임기) %>% as.numeric("years")) %>% 
+  select(-임기) %>% 
+  mutate(평균재난 = 재난횟수/재임기간) %>% 
+  arrange(desc(평균재난))
+
+president_disaster
+```
+
+
+```{r}
+president_tbl %>% 
+  group_by(이름) %>% 
+  mutate(재난횟수 = paste0(disaster_tbl$날짜 %within% 임기, collapse = ";")) %>% 
+  mutate(재난 = str_split(재난횟수, ";")) %>% 
+  select(이름, 재난) %>% 
+  unnest(재난)
+  group_by(이름) %>% 
+  nest(data = 재난횟수) %>% 
+  unnest(data)
+
+
+disaster_tbl %>% 
+  mutate(대통령 = ifelse())
+
+
+president_tbl %>% 
+  select(-임기) %>% 
+  ggplot(aes(x = 시작일, y = fct_reorder(이름, 시작일)) ) +
+    geom_segment(aes(xend = 종료일, yend =이름)) +
+    labs(x = "",
+         y = "") +
+    geom_point(data = disaster_tbl,
+               aes(x=날짜))
+```
+
+
