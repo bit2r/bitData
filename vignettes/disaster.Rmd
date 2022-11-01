@@ -10,6 +10,8 @@ editor_options:
 ---
 
 ```{r, include = FALSE}
+options(rmarkdown.html_vignette.check_title = FALSE)
+
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -125,24 +127,28 @@ typoon_g <- typoon_tbl %>%
          title = "태풍으로 인한 인명피해",
          caption = "자료출처: 나무위키 태풍/대한민국/각종 기록 순위") +
     theme_election()
-    
-ggsave( glue::glue("inst/extdata/figure/typoon.png") , 
-      typoon_g,
-      device = ragg::agg_png, 
-      width = 250, height = 176, units = "mm", res = 600) 
+
+typoon_g
+
+# ggsave( glue::glue("inst/extdata/figure/typoon.png") , 
+#       typoon_g,
+#       device = ragg::agg_png, 
+#       width = 250, height = 176, units = "mm", res = 600) 
 
 ```
+
 
 
 # 인재 
 
 [서울경제](https://www.sedaily.com/NewsView/26CJW8PC06), [헤럴드경제](http://news.heraldcorp.com/view.php?ud=20140417000274) 뉴스기사로 실린 통계자료를 결합하여 1950년 이후 대규모 참사에 대한 데이터를 생성한다.
 
+## 데이터
 
 ```{r}
 ## 해럴드경제 뉴스(2014)
 # http://news.heraldcorp.com/view.php?ud=20140417000274
-herald_raw <- read_lines("data-raw/herald_news_disaster.txt")
+herald_raw <- read_lines(glue::glue("{here::here()}/data-raw/herald_news_disaster.txt"))
 
 herald_tbl <- herald_raw %>%
   as_tibble() %>%
@@ -189,8 +195,10 @@ library(lubridate)
 ## 대통령 재임기간
 president <- tribble(~"이름", ~"시작일", ~"종료일",
                      "이승만", "1948-08-15", "1960-04-26",
-                     "윤보선", "1960-08-02", "1962-03-23",
-                     "박정희", "1963-12-17", "1979-10-26",
+                     "윤보선", "1960-08-02", "1962-03-22",
+                     # "박정희", "1962-03-22", "1963-12-16", 박정희 권한대행
+                     # "박정희", "1963-12-17", "1979-10-26",
+                     "박정희", "1962-03-22$", "1979-10-26", # 권한대행 포함
                      "최규하", "1979-12-06", "1980-08-16",
                      "전두환", "1980-09-01", "1988-02-24",
                      "노태우", "1988-02-25", "1993-02-24",
@@ -205,46 +213,157 @@ president <- tribble(~"이름", ~"시작일", ~"종료일",
 president_tbl <- president %>% 
   mutate(`시작일` = lubridate::ymd(`시작일`),
          `종료일` = lubridate::ymd(`종료일`)) %>% 
-  mutate(임기 = lubridate::interval(시작일, 종료일))
+  mutate(임기 = lubridate::interval(시작일, 종료일)) %>% 
+  mutate(재임기간 = lubridate::as.duration(임기) %>% as.numeric("years"))
   
 
-president_disaster <- president_tbl %>% 
+president_tbl
+```
+
+재난 데이터(`disaster_tbl`)와 대통령 임기 데이터(`president_tbl`)를 결합하여 하나의 데이터로 제작한다.
+
+```{r}
+itaewon_list <- list(disaster = disaster_tbl,
+                    president = president_tbl)
+```
+
+
+
+## 분석
+
+### 임기중 평균 재난
+
+재임기간 중 평균 재난 횟수를 내림차순으로 정리한다.
+
+```{r}
+president_disaster <- itaewon_list$president %>% 
   group_by(이름) %>% 
-  mutate(재난횟수 = sum(disaster_tbl$날짜 %within% 임기)) %>% 
+  mutate(재난횟수 = sum(itaewon_list$disaster$날짜 %within% 임기)) %>% 
   ungroup() %>% 
   mutate(재임기간 = lubridate::as.duration(임기) %>% as.numeric("years")) %>% 
   select(-임기) %>% 
-  mutate(평균재난 = 재난횟수/재임기간) %>% 
-  arrange(desc(평균재난))
+  mutate(연도별평균재난횟수 = 재난횟수/재임기간) %>% 
+  arrange(desc(연도별평균재난횟수))
 
 president_disaster
 ```
 
 
 ```{r}
-president_tbl %>% 
+show_disaster <- function(mask) {
+  itaewon_list$disaster %>% 
+    mutate(mask = mask) %>% 
+    filter(mask)
+}
+
+itaewon_tbl <- itaewon_list$president %>% 
   group_by(이름) %>% 
-  mutate(재난횟수 = paste0(disaster_tbl$날짜 %within% 임기, collapse = ";")) %>% 
-  mutate(재난 = str_split(재난횟수, ";")) %>% 
-  select(이름, 재난) %>% 
-  unnest(재난)
-  group_by(이름) %>% 
-  nest(data = 재난횟수) %>% 
-  unnest(data)
+  mutate(재난여부 = list(itaewon_list$disaster$날짜 %within% 임기)) %>% 
+  select(이름, 시작일, 종료일, 재난여부) %>% 
+  mutate(재난 = map(재난여부, show_disaster)) %>% 
+  unnest(재난) %>% 
+  ungroup() %>% 
+  select(이름, 시작일, 종료일, 재난발생일 = 날짜, 사망, 참사내역) 
 
-
-disaster_tbl %>% 
-  mutate(대통령 = ifelse())
-
-
-president_tbl %>% 
-  select(-임기) %>% 
-  ggplot(aes(x = 시작일, y = fct_reorder(이름, 시작일)) ) +
-    geom_segment(aes(xend = 종료일, yend =이름)) +
-    labs(x = "",
-         y = "") +
-    geom_point(data = disaster_tbl,
-               aes(x=날짜))
+itaewon_tbl  
 ```
 
+```{r}
+library(ggrepel)
+extrafont::loadfonts()
+
+itaewon_viz <- itaewon_tbl %>% 
+  bind_rows(itaewon_list$president %>% 
+              select(이름, 시작일, 종료일) %>% 
+              filter(이름 %in% c("문재인", "노무현", "이명박", "윤보선", "최규하"))) %>% 
+  mutate(정당 = case_when(이름 %in% c("윤보선", "김대중", "노무현", "문재인") ~ "민주당계",
+                          이름 == "최규하" ~ "무소속",
+                          TRUE ~ "국민의힘계"))
+
+itaewon_g <- itaewon_viz %>%   
+  ggplot(aes(x = 시작일, y = fct_reorder(이름, 시작일)) ) +
+    geom_segment(aes(xend = 종료일, yend = 이름, color = 정당), size = 0.7) +
+    geom_label_repel(aes(x = 재난발생일, y = 이름, label = 참사내역), size = 3,
+                     alpha = 1,
+                     fill = NA,
+                     min.segment.length = 0,
+                     max.overlaps = Inf,
+                     label.size = NA,
+                     family = "NanumBarunPen") +
+    geom_point( aes(x = 재난발생일, y = 이름, size = 사망, color = 정당)) +
+    scale_size_continuous(range = c(1, 3)) +
+    theme_election() +
+    labs(x = "",
+         y = "",
+         title = "대통령 정권기간별 대형 참사 연대기",
+         size = "사망자수(명)",
+         caption = "자료출처: 위키백과 대통령 재임기간, 해럴드경제/서울경제 뉴스기사") +
+    scale_color_manual(values = c("민주당계" = "blue",
+                                  "국민의힘계" = "red",
+                                  "무소속" = "gray10"))
+
+itaewon_g
+    
+# ggsave( glue::glue("inst/extdata/figure/itaewon.png") , 
+#       itaewon_g,
+#       device = ragg::agg_png, 
+#       width = 250, height = 176, units = "mm", res = 600) 
+
+```
+
+# 표
+
+## 참사
+
+```{r}
+library(gt)
+
+disaster_gt <- disaster_tbl %>% 
+  arrange(desc(날짜)) %>% 
+  mutate(날짜 = format(날짜, "%Y년 %m월 %d일")) %>%
+  gt() %>% 
+    tab_header(
+      title = md("**&#127895; 역대 대형참사 &#127895;**"),
+      subtitle = md("*2022년 10월 29일 이태원 참사*")
+    ) %>% 
+    tab_options(
+      table.width = pct(77),
+      heading.background.color = "#8f3018", # R logo 파란색
+      heading.title.font.size = "20px",
+      column_labels.background.color = "#F7F7F7", # R logo 회색 
+      column_labels.font.weight = "bold",
+      stub.background.color = "#ffffff",
+      stub.font.weight = "bold"
+    ) %>% 
+    cols_align(
+      align = "center",
+      columns = everything()
+    ) %>% 
+  tab_source_note(
+    source_note =  md("**자료출처**: 헤럴드경제와 서울경제 뉴스기사")
+  ) %>% 
+  data_color(
+    columns = c(사망),
+    colors = scales::col_numeric(
+      palette = paletteer::paletteer_d(
+        palette = "ggsci::blue_material"
+        ) %>% as.character(),
+      domain = NULL
+      )
+  ) %>% 
+   tab_style(style = list(cell_text(weight = 'bold',
+                                    size  = "large",
+                                    color = "black")), 
+            locations = cells_body(columns = 사망, 
+                                   rows = 사망 >= 154))  %>% 
+   tab_style(style = list(cell_text(weight = 'bold', size  = "large")), 
+            locations = cells_body(columns = c(날짜, 참사내역), 
+                                   rows = 사망 >= 154))  
+
+disaster_gt
+
+# disaster_gt %>% 
+#   gtsave(glue::glue("inst/extdata/figure/disaster_gt.png"))
+
+```
 
