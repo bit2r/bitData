@@ -1,0 +1,30 @@
+---
+title: "고등학생 통학 데이터 분석"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{attend_school}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, include = FALSE}
+options(rmarkdown.html_vignette.check_title = FALSE)
+
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(bitData)
+```
+
+# 데이터
+
+```{r}
+bitData::school
+```
+

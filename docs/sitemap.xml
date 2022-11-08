@@ -4,6 +4,9 @@
     <loc>/404.html</loc>
   </url>
   <url>
+    <loc>/articles/attend_school.html</loc>
+  </url>
+  <url>
     <loc>/articles/chips.html</loc>
   </url>
   <url>
@@ -71,6 +74,9 @@
   </url>
   <url>
     <loc>/reference/pr_month.html</loc>
+  </url>
+  <url>
+    <loc>/reference/school.html</loc>
   </url>
   <url>
     <loc>/reference/terms.html</loc>

@@ -222,4 +222,18 @@ NULL
 #' @source 위키백과 대한민국의 대통령 목록 \url{https://ko.wikipedia.org/wiki/대한민국의_대통령_목록}
 "terms"
 
-
+#' @title 봉담고등학생 등교 데이터
+#' @description 경기도 소재 봉담고등학교 학생들 설문을 통해 확보된 등교정보를 담고 있는 데이터
+#' @format 2,752개 학생 등교 관측점과 8개 변수를 갖는 데이터프레임:
+#' \describe{
+#'   \item{\code{요일}}{character 등교요일, 월/화/수/목/금}
+#'   \item{\code{통학방식}}{character 통학방식, 도보, 버스, 자전거, 자가용 등}
+#'   \item{\code{출발시간}}{double 아침 학교로 출발한 시간, 시분초}
+#'   \item{\code{도착시간}}{double 아침 학교에 도착한 시간, 시분초}
+#'   \item{\code{지각여부}}{character 정상등교와 지각여부}
+#'   \item{\code{소요시간}}{double 출발시간에서 도착시간을 뺀 총 소요시간}
+#'   \item{\code{위도}}{double 학생 집 위도(Latitude) }
+#'   \item{\code{경도}}{double 학생 집 경도(Longitude) }
+#'}
+#' @details 봉담고등학교 강우혁 선생님이 봉담고 설문을 통해 확보하여 개인정보를 삭제한 후 등교정보를 담고 있는 데이터셋
+"school"

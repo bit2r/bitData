@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>기후위기 • bitData</title>
+<title>고등학생 통학 데이터 분석 • bitData</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="기후위기">
+<script src="../pkgdown.js"></script><meta property="og:title" content="고등학생 통학 데이터 분석">
 <meta property="og:description" content="bitData">
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -87,42 +87,50 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>기후위기</h1>
+      <h1 data-toc-skip>고등학생 통학 데이터 분석</h1>
             
       
       
-      <div class="hidden name"><code>ESG.Rmd</code></div>
+      <div class="hidden name"><code>attend_school.Rmd</code></div>
 
     </div>
 
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">bitData</span><span class="op">)</span></span></code></pre></div>
-<div class="section level2">
-<h2 id="데이터셋">데이터셋<a class="anchor" aria-label="anchor" href="#%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%85%8B"></a>
-</h2>
-<p>최근들어 지구온난화에 따라 가뭄과 홍수가 빈번히 전세계적으로 일어나고
-있다. 지구온난화와 관련이 있는 데이터셋이 <code>bitData</code>에 다음이
-포함되어 있다.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">bitData</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">bitData_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">'bitData'</span><span class="op">)</span></span>
-<span><span class="va">bitData_list</span><span class="op">$</span><span class="va">results</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">Item</span>, <span class="va">Title</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/janitor/man/clean_names.html" class="external-link">clean_names</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html" class="external-link">str_detect</a></span><span class="op">(</span><span class="va">title</span>, <span class="st">"온실가스|대기오염|강수"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 2</span></span></span>
-<span><span class="co">#&gt;   item      title                       </span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> co2       국가 온실가스 종류별 배출량 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> pollution 전국 대기오염물질 배출량    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> pr_day    서초관측소 10년 일별 강수량 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> pr_hour   서초관측소 1년 시간당 강수량</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> pr_month  서초관측소 월별 강수량</span></span></code></pre>
+<span><span class="co">#&gt; Warning: replacing previous import 'jsonlite::flatten' by 'purrr::flatten' when</span></span>
+<span><span class="co">#&gt; loading 'bitData'</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Attaching package: 'bitData'</span></span>
+<span><span class="co">#&gt; The following object is masked from 'package:datasets':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     co2</span></span></code></pre></div>
+<div class="section level2">
+<h2 id="데이터">데이터<a class="anchor" aria-label="anchor" href="#%EB%8D%B0%EC%9D%B4%ED%84%B0"></a>
+</h2>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">bitData</span><span class="fu">::</span><span class="va"><a href="../reference/school.html">school</a></span></span>
+<span><span class="co">#&gt; Loading required package: lubridate</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Attaching package: 'lubridate'</span></span>
+<span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     date, intersect, setdiff, union</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2,752 × 8</span></span></span>
+<span><span class="co">#&gt;    요일  통학방식 출발시간  도착시간  지각여부  소요시간   위도  경도</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;Period&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;Period&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;Period&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 금    도보     7H 35M 0S 7H 40M 0S 정상 등교 5M 0S      37.2  127.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 화    도보     8H 27M 0S 8H 35M 0S 정상 등교 8M 0S      37.2  127.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 월    도보     8H 30M 0S 8H 36M 0S 정상 등교 6M 0S      37.2  127.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 목    도보     8H 35M 0S 8H 42M 0S 정상 등교 7M 0S      37.2  127.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 금    도보     8H 35M 0S 8H 42M 0S 정상 등교 7M 0S      37.2  127.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 화    도보     8H 40M 0S 8H 45M 0S 정상 등교 5M 0S      37.2  127.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 금    도보     7H 49M 0S 8H 46M 0S 정상 등교 1H -3M 0S  37.2  127.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 수    도보     8H 40M 0S 8H 47M 0S 정상 등교 7M 0S      37.2  127.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 화    도보     8H 40M 0S 8H 47M 0S 정상 등교 7M 0S      37.2  127.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 월    도보     8H 35M 0S 8H 47M 0S 정상 등교 12M 0S     37.2  127.</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 2,742 more rows</span></span></span></code></pre></div>
 </div>
   </div>
 

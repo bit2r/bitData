@@ -2,9 +2,10 @@ pandoc: '2.18'
 pkgdown: 2.0.5
 pkgdown_sha: ~
 articles:
+  attend_school: attend_school.html
   chips: chips.html
   disaster: disaster.html
   ESG: ESG.html
   exam_score: exam_score.html
-last_built: 2022-11-08T01:05Z
+last_built: 2022-11-08T02:29Z
 
