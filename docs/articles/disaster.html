@@ -94,8 +94,11 @@
 
     
     
+<p>10.29 참사(이태원) 희생되신 분들을 추모하며 역대 자연재해 대표적인
+태풍을 통한 희생자와 인재로 희생되신 통계 데이터를 제작하고 대통령
+임기와 결합한 시각화를 통해 이번 참사를 되돌아보고자 한다.</p>
 <div class="section level2">
-<h2 id="태풍">태풍<a class="anchor" aria-label="anchor" href="#%ED%83%9C%ED%92%8D"></a>
+<h2 id="자연재해-태풍">자연재해 태풍<a class="anchor" aria-label="anchor" href="#%EC%9E%90%EC%97%B0%EC%9E%AC%ED%95%B4-%ED%83%9C%ED%92%8D"></a>
 </h2>
 <p>천재의 대표적인 사례로 대한민국에서는 태풍이 꼽히고 있다. 지구
 온난화의 영향으로 갈수록 태풍이 강해지고 있음에도 불구하고 사망자수는
@@ -116,32 +119,27 @@
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Conflicts</span> ────────────────────────────────────────── tidyverse_conflicts() ──</span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">dplyr</span>::<span style="color: #00BB00;">filter()</span> masks <span style="color: #0000BB;">stats</span>::filter()</span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">dplyr</span>::<span style="color: #00BB00;">lag()</span>    masks <span style="color: #0000BB;">stats</span>::lag()</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rvest.tidyverse.org/" class="external-link">rvest</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Attaching package: 'rvest'</span></span>
-<span><span class="co">#&gt; The following object is masked from 'package:readr':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     guess_encoding</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/slowkow/ggrepel" class="external-link">ggrepel</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org" class="external-link">lubridate</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Attaching package: 'lubridate'</span></span>
+<span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     date, intersect, setdiff, union</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">bitData</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: replacing previous import 'jsonlite::flatten' by 'purrr::flatten' when</span></span>
+<span><span class="co">#&gt; loading 'bitData'</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Attaching package: 'bitData'</span></span>
+<span><span class="co">#&gt; The following object is masked from 'package:tidyr':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     population</span></span>
+<span><span class="co">#&gt; The following object is masked from 'package:datasets':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     co2</span></span>
 <span><span class="fu">extrafont</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/extrafont/man/loadfonts.html" class="external-link">loadfonts</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">typoon_raw</span> <span class="op">&lt;-</span> <span class="fu"><a href="http://xml2.r-lib.org/reference/read_xml.html" class="external-link">read_html</a></span><span class="op">(</span><span class="st">"https://namu.wiki/w/%ED%83%9C%ED%92%8D/%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD/%EA%B0%81%EC%A2%85%20%EA%B8%B0%EB%A1%9D%20%EC%88%9C%EC%9C%84"</span>,</span>
-<span>                        encoding <span class="op">=</span> <span class="st">'utf-8'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_element.html" class="external-link">html_elements</a></span><span class="op">(</span><span class="st">'table'</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">typoon_tbl</span> <span class="op">&lt;-</span> <span class="va">typoon_raw</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_table.html" class="external-link">html_table</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="va">.</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice</a></span><span class="op">(</span><span class="fl">3</span><span class="op">:</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>시작일 <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html" class="external-link">ymd</a></span><span class="op">(</span><span class="va">X2</span><span class="op">)</span>,</span>
-<span>         종료일 <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html" class="external-link">ymd</a></span><span class="op">(</span><span class="va">X3</span><span class="op">)</span>,</span>
-<span>         사망   <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_number.html" class="external-link">parse_number</a></span><span class="op">(</span><span class="va">X5</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">시작일</span>, <span class="va">종료일</span>, <span class="va">사망</span>, 태풍명 <span class="op">=</span> <span class="va">X4</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>기간 <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/interval.html" class="external-link">interval</a></span><span class="op">(</span><span class="va">시작일</span>, <span class="va">종료일</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>지속일수 <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/as.duration.html" class="external-link">as.duration</a></span><span class="op">(</span><span class="va">기간</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="st">"days"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">기간</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">typoon_g</span> <span class="op">&lt;-</span> <span class="va">typoon_tbl</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span><span class="va">typhoon_g</span> <span class="op">&lt;-</span> <span class="va">typhoon</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">시작일</span>, y <span class="op">=</span> <span class="va">사망</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
@@ -154,12 +152,12 @@
 <span>         caption <span class="op">=</span> <span class="st">"자료출처: 나무위키 태풍/대한민국/각종 기록 순위"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">theme_election</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">typoon_g</span></span></code></pre></div>
+<span><span class="va">typhoon_g</span></span></code></pre></div>
 <p><img src="disaster_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="co"># ggsave( glue::glue("inst/extdata/figure/typoon.png") , </span></span>
-<span><span class="co">#       typoon_g,</span></span>
+<span><span class="co"># ggsave( glue::glue("inst/extdata/figure/typhoon.png") , </span></span>
+<span><span class="co">#       typhoon_g,</span></span>
 <span><span class="co">#       device = ragg::agg_png, </span></span>
 <span><span class="co">#       width = 250, height = 176, units = "mm", res = 600) </span></span></code></pre></div>
 </div>
@@ -169,281 +167,12 @@
 <p><a href="https://www.sedaily.com/NewsView/26CJW8PC06" class="external-link">서울경제</a>,
 <a href="http://news.heraldcorp.com/view.php?ud=20140417000274" class="external-link">헤럴드경제</a>
 뉴스기사로 실린 통계자료를 결합하여 1950년 이후 대규모 참사에 대한
-데이터를 생성한다.</p>
-<div class="section level3">
-<h3 id="데이터">데이터<a class="anchor" aria-label="anchor" href="#%EB%8D%B0%EC%9D%B4%ED%84%B0"></a>
-</h3>
+데이터를 바탕으로 역대 참사를 표로 제작한다.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## 해럴드경제 뉴스(2014)</span></span>
-<span><span class="co"># http://news.heraldcorp.com/view.php?ud=20140417000274</span></span>
-<span><span class="va">herald_raw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_lines.html" class="external-link">read_lines</a></span><span class="op">(</span><span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue</a></span><span class="op">(</span><span class="st">"{here::here()}/data-raw/herald_news_disaster.txt"</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">herald_tbl</span> <span class="op">&lt;-</span> <span class="va">herald_raw</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice</a></span><span class="op">(</span><span class="fl">2</span><span class="op">:</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>날짜 <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_extract.html" class="external-link">str_extract</a></span><span class="op">(</span><span class="va">value</span>,</span>
-<span>                          pattern <span class="op">=</span> <span class="st">"\\d{4}년\\s?\\d{1,2}월\\s?\\d{1,2}일"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>           <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html" class="external-link">ymd</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>사망 <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_extract.html" class="external-link">str_extract</a></span><span class="op">(</span><span class="va">value</span>, pattern <span class="op">=</span> <span class="st">"\\d{1,4}명$"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>           <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_number.html" class="external-link">parse_number</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>참사내역 <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_remove.html" class="external-link">str_remove</a></span><span class="op">(</span><span class="va">value</span>, pattern <span class="op">=</span> <span class="st">"\\d{1,4}명$"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>           <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_remove.html" class="external-link">str_remove</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"\\d{4}년\\s?\\d{1,2}월\\s?\\d{1,2}일"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>           <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_trim.html" class="external-link">str_trim</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">날짜</span>, <span class="va">사망</span>, <span class="va">참사내역</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">herald_tbl</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 17 × 3</span></span></span>
-<span><span class="co">#&gt;    날짜        사망 참사내역                        </span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                           </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1953-01-09   330 여객선 창경호 침몰              </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1963-01-18   138 여객선 연호 침몰                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1970-04-08    33 마포와우아파트붕괴              </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1970-12-15   323 여객선 남영호 침몰              </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1971-12-25   165 대연각호텔 화재                 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1972-12-02    51 서울시민회관화재                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1974-02-22   157 해군YTL선 전복                  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1974-11-03    88 청량리 대왕코너 화재            </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1977-11-11    59 이리역 열차폭발                 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1983-09-01   269 대한항공 보잉747기 피격         </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 1987-11-29   115 대한항공(KAL) 보잉 707기공중폭파</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 1993-10-10   292 여객선 서해훼리호 침몰          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> 1994-10-21    32 성수대교붕괴                    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> 1995-04-28   101 대구지하철 1호선 도시가스·폭발  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> 1995-06-29   502 삼풍백화점 붕괴                 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> 1997-08-06   225 대한항공 B747-300기 괌 추락     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> 2003-02-18   192 대구시지하철 방화</span></span>
-<span></span>
-<span><span class="co">## 서울경제</span></span>
-<span><span class="co"># https://www.sedaily.com/NewsView/26CJW8PC06</span></span>
-<span><span class="va">big_disaster_raw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span></span>
-<span><span class="op">~</span><span class="st">"날짜"</span>,<span class="op">~</span><span class="st">"사망"</span>,<span class="op">~</span><span class="st">"부상"</span>,<span class="op">~</span><span class="st">"참사내역"</span>,</span>
-<span><span class="st">"1994-10-21"</span>,<span class="fl">32</span>,<span class="fl">17</span>,<span class="st">"성수대교 붕괴"</span>,</span>
-<span><span class="st">"1995-06-29"</span>,<span class="fl">502</span>,<span class="fl">937</span>,<span class="st">"삼풍백화점 붕괴"</span>,</span>
-<span><span class="st">"2003-02-18"</span>,<span class="fl">192</span>,<span class="fl">151</span>,<span class="st">"대구 지하철 방화"</span>,</span>
-<span><span class="st">"2014-04-16"</span>,<span class="fl">299</span>,<span class="fl">5</span>,<span class="st">"세월호 침몰"</span>,</span>
-<span><span class="st">"2022-10-29"</span>,<span class="fl">154</span>,<span class="fl">132</span>,<span class="st">"이태원 압사"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">big_disaster</span> <span class="op">&lt;-</span> <span class="va">big_disaster_raw</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>날짜 <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html" class="external-link">ymd</a></span><span class="op">(</span><span class="va">날짜</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># big_disaster</span></span>
-<span></span>
-<span><span class="va">disaster_tbl</span> <span class="op">&lt;-</span> <span class="va">big_disaster</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">날짜</span> <span class="op">&gt;=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2014-01-01"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="va">herald_tbl</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">부상</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">날짜</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">disaster_tbl</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 19 × 3</span></span></span>
-<span><span class="co">#&gt;    날짜        사망 참사내역                        </span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                           </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1953-01-09   330 여객선 창경호 침몰              </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1963-01-18   138 여객선 연호 침몰                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1970-04-08    33 마포와우아파트붕괴              </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1970-12-15   323 여객선 남영호 침몰              </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1971-12-25   165 대연각호텔 화재                 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1972-12-02    51 서울시민회관화재                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1974-02-22   157 해군YTL선 전복                  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1974-11-03    88 청량리 대왕코너 화재            </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1977-11-11    59 이리역 열차폭발                 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1983-09-01   269 대한항공 보잉747기 피격         </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 1987-11-29   115 대한항공(KAL) 보잉 707기공중폭파</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 1993-10-10   292 여객선 서해훼리호 침몰          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> 1994-10-21    32 성수대교붕괴                    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> 1995-04-28   101 대구지하철 1호선 도시가스·폭발  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> 1995-06-29   502 삼풍백화점 붕괴                 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> 1997-08-06   225 대한항공 B747-300기 괌 추락     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> 2003-02-18   192 대구시지하철 방화               </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span> 2014-04-16   299 세월호 침몰                     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span> 2022-10-29   154 이태원 압사</span></span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org" class="external-link">lubridate</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Attaching package: 'lubridate'</span></span>
-<span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     date, intersect, setdiff, union</span></span>
-<span><span class="co">## 대통령 재임기간</span></span>
-<span><span class="va">president</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span><span class="op">~</span><span class="st">"이름"</span>, <span class="op">~</span><span class="st">"시작일"</span>, <span class="op">~</span><span class="st">"종료일"</span>,</span>
-<span>                     <span class="st">"이승만"</span>, <span class="st">"1948-08-15"</span>, <span class="st">"1960-04-26"</span>,</span>
-<span>                     <span class="st">"윤보선"</span>, <span class="st">"1960-08-02"</span>, <span class="st">"1962-03-22"</span>,</span>
-<span>                     <span class="co"># "박정희", "1962-03-22", "1963-12-16", 박정희 권한대행</span></span>
-<span>                     <span class="co"># "박정희", "1963-12-17", "1979-10-26",</span></span>
-<span>                     <span class="st">"박정희"</span>, <span class="st">"1962-03-22$"</span>, <span class="st">"1979-10-26"</span>, <span class="co"># 권한대행 포함</span></span>
-<span>                     <span class="st">"최규하"</span>, <span class="st">"1979-12-06"</span>, <span class="st">"1980-08-16"</span>,</span>
-<span>                     <span class="st">"전두환"</span>, <span class="st">"1980-09-01"</span>, <span class="st">"1988-02-24"</span>,</span>
-<span>                     <span class="st">"노태우"</span>, <span class="st">"1988-02-25"</span>, <span class="st">"1993-02-24"</span>,</span>
-<span>                     <span class="st">"김영삼"</span>, <span class="st">"1993-02-25"</span>, <span class="st">"1998-02-24"</span>,</span>
-<span>                     <span class="st">"김대중"</span>, <span class="st">"1998-02-25"</span>, <span class="st">"2003-02-24"</span>,</span>
-<span>                     <span class="st">"노무현"</span>, <span class="st">"2003-02-25"</span>, <span class="st">"2008-02-24"</span>,</span>
-<span>                     <span class="st">"이명박"</span>, <span class="st">"2008-02-25"</span>, <span class="st">"2013-02-24"</span>,</span>
-<span>                     <span class="st">"박근혜"</span>, <span class="st">"2013-02-25"</span>, <span class="st">"2016-12-09"</span>,</span>
-<span>                     <span class="st">"문재인"</span>, <span class="st">"2017-05-10"</span>, <span class="st">"2022-05-09"</span>,</span>
-<span>                     <span class="st">"윤석열"</span>, <span class="st">"2022-05-10"</span>, <span class="st">"2022-10-31"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">president_tbl</span> <span class="op">&lt;-</span> <span class="va">president</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>`시작일` <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html" class="external-link">ymd</a></span><span class="op">(</span><span class="va">`시작일`</span><span class="op">)</span>,</span>
-<span>         `종료일` <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html" class="external-link">ymd</a></span><span class="op">(</span><span class="va">`종료일`</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>임기 <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/interval.html" class="external-link">interval</a></span><span class="op">(</span><span class="va">시작일</span>, <span class="va">종료일</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>재임기간 <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/as.duration.html" class="external-link">as.duration</a></span><span class="op">(</span><span class="va">임기</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="st">"years"</span><span class="op">)</span><span class="op">)</span></span>
-<span>  </span>
-<span></span>
-<span><span class="va">president_tbl</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 13 × 5</span></span></span>
-<span><span class="co">#&gt;    이름   시작일     종료일     임기                           재임기간</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;Interval&gt;</span>                        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 이승만 1948-08-15 1960-04-26 1948-08-15 UTC--1960-04-26 UTC   11.7  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 윤보선 1960-08-02 1962-03-22 1960-08-02 UTC--1962-03-22 UTC    1.63 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 박정희 1962-03-22 1979-10-26 1962-03-22 UTC--1979-10-26 UTC   17.6  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 최규하 1979-12-06 1980-08-16 1979-12-06 UTC--1980-08-16 UTC    0.695</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 전두환 1980-09-01 1988-02-24 1980-09-01 UTC--1988-02-24 UTC    7.48 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 노태우 1988-02-25 1993-02-24 1988-02-25 UTC--1993-02-24 UTC    5.00 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 김영삼 1993-02-25 1998-02-24 1993-02-25 UTC--1998-02-24 UTC    5.00 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 김대중 1998-02-25 2003-02-24 1998-02-25 UTC--2003-02-24 UTC    5.00 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 노무현 2003-02-25 2008-02-24 2003-02-25 UTC--2008-02-24 UTC    5.00 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 이명박 2008-02-25 2013-02-24 2008-02-25 UTC--2013-02-24 UTC    5.00 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 박근혜 2013-02-25 2016-12-09 2013-02-25 UTC--2016-12-09 UTC    3.79 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 문재인 2017-05-10 2022-05-09 2017-05-10 UTC--2022-05-09 UTC    5.00 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> 윤석열 2022-05-10 2022-10-31 2022-05-10 UTC--2022-10-31 UTC    0.476</span></span></code></pre></div>
-<p>재난 데이터(<code>disaster_tbl</code>)와 대통령 임기
-데이터(<code>president_tbl</code>)를 결합하여 하나의 데이터로
-제작한다.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">itaewon_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>disaster <span class="op">=</span> <span class="va">disaster_tbl</span>,</span>
-<span>                    president <span class="op">=</span> <span class="va">president_tbl</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="분석">분석<a class="anchor" aria-label="anchor" href="#%EB%B6%84%EC%84%9D"></a>
-</h3>
-<div class="section level4">
-<h4 id="임기중-평균-재난">임기중 평균 재난<a class="anchor" aria-label="anchor" href="#%EC%9E%84%EA%B8%B0%EC%A4%91-%ED%8F%89%EA%B7%A0-%EC%9E%AC%EB%82%9C"></a>
-</h4>
-<p>재임기간 중 평균 재난 횟수를 내림차순으로 정리한다.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">president_disaster</span> <span class="op">&lt;-</span> <span class="va">itaewon_list</span><span class="op">$</span><span class="va">president</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">이름</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>재난횟수 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">itaewon_list</span><span class="op">$</span><span class="va">disaster</span><span class="op">$</span><span class="va">날짜</span> <span class="op"><a href="https://lubridate.tidyverse.org/reference/within-interval.html" class="external-link">%within%</a></span> <span class="va">임기</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>재임기간 <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/as.duration.html" class="external-link">as.duration</a></span><span class="op">(</span><span class="va">임기</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="st">"years"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">임기</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>연도별평균재난횟수 <span class="op">=</span> <span class="va">재난횟수</span><span class="op">/</span><span class="va">재임기간</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc</a></span><span class="op">(</span><span class="va">연도별평균재난횟수</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">president_disaster</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 13 × 6</span></span></span>
-<span><span class="co">#&gt;    이름   시작일     종료일     재임기간 재난횟수 연도별평균재난횟수</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 윤석열 2022-05-10 2022-10-31    0.476        1             2.10  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 김영삼 1993-02-25 1998-02-24    5.00         5             1.00  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 박정희 1962-03-22 1979-10-26   17.6          8             0.455 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 전두환 1980-09-01 1988-02-24    7.48         2             0.267 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 박근혜 2013-02-25 2016-12-09    3.79         1             0.264 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 김대중 1998-02-25 2003-02-24    5.00         1             0.200 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 이승만 1948-08-15 1960-04-26   11.7          1             0.085<span style="text-decoration: underline;">5</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 윤보선 1960-08-02 1962-03-22    1.63         0             0     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 최규하 1979-12-06 1980-08-16    0.695        0             0     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 노태우 1988-02-25 1993-02-24    5.00         0             0     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 노무현 2003-02-25 2008-02-24    5.00         0             0     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 이명박 2008-02-25 2013-02-24    5.00         0             0     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> 문재인 2017-05-10 2022-05-09    5.00         0             0</span></span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">show_disaster</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">mask</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">itaewon_list</span><span class="op">$</span><span class="va">disaster</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>mask <span class="op">=</span> <span class="va">mask</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">mask</span><span class="op">)</span></span>
-<span><span class="op">}</span></span>
-<span></span>
-<span><span class="va">itaewon_tbl</span> <span class="op">&lt;-</span> <span class="va">itaewon_list</span><span class="op">$</span><span class="va">president</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">이름</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>재난여부 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">itaewon_list</span><span class="op">$</span><span class="va">disaster</span><span class="op">$</span><span class="va">날짜</span> <span class="op"><a href="https://lubridate.tidyverse.org/reference/within-interval.html" class="external-link">%within%</a></span> <span class="va">임기</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">이름</span>, <span class="va">시작일</span>, <span class="va">종료일</span>, <span class="va">재난여부</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>재난 <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">재난여부</span>, <span class="va">show_disaster</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">재난</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">이름</span>, <span class="va">시작일</span>, <span class="va">종료일</span>, 재난발생일 <span class="op">=</span> <span class="va">날짜</span>, <span class="va">사망</span>, <span class="va">참사내역</span><span class="op">)</span> </span>
-<span></span>
-<span><span class="va">itaewon_tbl</span>  </span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 19 × 6</span></span></span>
-<span><span class="co">#&gt;    이름   시작일     종료일     재난발생일  사망 참사내역                       </span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 이승만 1948-08-15 1960-04-26 1953-01-09   330 여객선 창경호 침몰             </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 박정희 1962-03-22 1979-10-26 1963-01-18   138 여객선 연호 침몰               </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 박정희 1962-03-22 1979-10-26 1970-04-08    33 마포와우아파트붕괴             </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 박정희 1962-03-22 1979-10-26 1970-12-15   323 여객선 남영호 침몰             </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 박정희 1962-03-22 1979-10-26 1971-12-25   165 대연각호텔 화재                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 박정희 1962-03-22 1979-10-26 1972-12-02    51 서울시민회관화재               </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 박정희 1962-03-22 1979-10-26 1974-02-22   157 해군YTL선 전복                 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 박정희 1962-03-22 1979-10-26 1974-11-03    88 청량리 대왕코너 화재           </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 박정희 1962-03-22 1979-10-26 1977-11-11    59 이리역 열차폭발                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 전두환 1980-09-01 1988-02-24 1983-09-01   269 대한항공 보잉747기 피격        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 전두환 1980-09-01 1988-02-24 1987-11-29   115 대한항공(KAL) 보잉 707기공중폭…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 김영삼 1993-02-25 1998-02-24 1993-10-10   292 여객선 서해훼리호 침몰         </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> 김영삼 1993-02-25 1998-02-24 1994-10-21    32 성수대교붕괴                   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> 김영삼 1993-02-25 1998-02-24 1995-04-28   101 대구지하철 1호선 도시가스·폭발 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> 김영삼 1993-02-25 1998-02-24 1995-06-29   502 삼풍백화점 붕괴                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> 김영삼 1993-02-25 1998-02-24 1997-08-06   225 대한항공 B747-300기 괌 추락    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> 김대중 1998-02-25 2003-02-24 2003-02-18   192 대구시지하철 방화              </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span> 박근혜 2013-02-25 2016-12-09 2014-04-16   299 세월호 침몰                    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span> 윤석열 2022-05-10 2022-10-31 2022-10-29   154 이태원 압사</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/slowkow/ggrepel" class="external-link">ggrepel</a></span><span class="op">)</span></span>
-<span><span class="fu">extrafont</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/extrafont/man/loadfonts.html" class="external-link">loadfonts</a></span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">itaewon_viz</span> <span class="op">&lt;-</span> <span class="va">itaewon_tbl</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="va">itaewon_list</span><span class="op">$</span><span class="va">president</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>              <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">이름</span>, <span class="va">시작일</span>, <span class="va">종료일</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>              <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">이름</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"문재인"</span>, <span class="st">"노무현"</span>, <span class="st">"이명박"</span>, <span class="st">"윤보선"</span>, <span class="st">"최규하"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>정당 <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html" class="external-link">case_when</a></span><span class="op">(</span><span class="va">이름</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"윤보선"</span>, <span class="st">"김대중"</span>, <span class="st">"노무현"</span>, <span class="st">"문재인"</span><span class="op">)</span> <span class="op">~</span> <span class="st">"민주당계"</span>,</span>
-<span>                          <span class="va">이름</span> <span class="op">==</span> <span class="st">"최규하"</span> <span class="op">~</span> <span class="st">"무소속"</span>,</span>
-<span>                          <span class="cn">TRUE</span> <span class="op">~</span> <span class="st">"국민의힘계"</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">itaewon_g</span> <span class="op">&lt;-</span> <span class="va">itaewon_viz</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>   </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">시작일</span>, y <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_reorder.html" class="external-link">fct_reorder</a></span><span class="op">(</span><span class="va">이름</span>, <span class="va">시작일</span><span class="op">)</span><span class="op">)</span> <span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_segment.html" class="external-link">geom_segment</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>xend <span class="op">=</span> <span class="va">종료일</span>, yend <span class="op">=</span> <span class="va">이름</span>, color <span class="op">=</span> <span class="va">정당</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/pkg/ggrepel/man/geom_text_repel.html" class="external-link">geom_label_repel</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">재난발생일</span>, y <span class="op">=</span> <span class="va">이름</span>, label <span class="op">=</span> <span class="va">참사내역</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">3</span>,</span>
-<span>                     alpha <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>                     fill <span class="op">=</span> <span class="cn">NA</span>,</span>
-<span>                     min.segment.length <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>                     max.overlaps <span class="op">=</span> <span class="cn">Inf</span>,</span>
-<span>                     label.size <span class="op">=</span> <span class="cn">NA</span>,</span>
-<span>                     family <span class="op">=</span> <span class="st">"NanumBarunPen"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">재난발생일</span>, y <span class="op">=</span> <span class="va">이름</span>, size <span class="op">=</span> <span class="va">사망</span>, color <span class="op">=</span> <span class="va">정당</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_size.html" class="external-link">scale_size_continuous</a></span><span class="op">(</span>range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu">theme_election</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">""</span>,</span>
-<span>         y <span class="op">=</span> <span class="st">""</span>,</span>
-<span>         title <span class="op">=</span> <span class="st">"대통령 정권기간별 대형 참사 연대기"</span>,</span>
-<span>         size <span class="op">=</span> <span class="st">"사망자수(명)"</span>,</span>
-<span>         caption <span class="op">=</span> <span class="st">"자료출처: 위키백과 대통령 재임기간, 해럴드경제/서울경제 뉴스기사"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"민주당계"</span> <span class="op">=</span> <span class="st">"blue"</span>,</span>
-<span>                                  <span class="st">"국민의힘계"</span> <span class="op">=</span> <span class="st">"red"</span>,</span>
-<span>                                  <span class="st">"무소속"</span> <span class="op">=</span> <span class="st">"gray10"</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">itaewon_g</span></span>
-<span><span class="co">#&gt; Warning: Removed 5 rows containing missing values (geom_label_repel).</span></span>
-<span><span class="co">#&gt; Warning: Removed 5 rows containing missing values (geom_point).</span></span></code></pre></div>
-<p><img src="disaster_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span>    </span>
-<span><span class="co"># ggsave( glue::glue("inst/extdata/figure/itaewon.png") , </span></span>
-<span><span class="co">#       itaewon_g,</span></span>
-<span><span class="co">#       device = ragg::agg_png, </span></span>
-<span><span class="co">#       width = 250, height = 176, units = "mm", res = 600) </span></span></code></pre></div>
-</div>
-</div>
-</div>
-<div class="section level2">
-<h2 id="표">표<a class="anchor" aria-label="anchor" href="#%ED%91%9C"></a>
-</h2>
-<div class="section level3">
-<h3 id="참사">참사<a class="anchor" aria-label="anchor" href="#%EC%B0%B8%EC%82%AC"></a>
-</h3>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com/" class="external-link">gt</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: package 'gt' was built under R version 4.2.1</span></span>
 <span></span>
-<span><span class="va">disaster_gt</span> <span class="op">&lt;-</span> <span class="va">disaster_tbl</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span><span class="va">disaster_gt</span> <span class="op">&lt;-</span> <span class="va">disaster</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc</a></span><span class="op">(</span><span class="va">날짜</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>날짜 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">날짜</span>, <span class="st">"%Y년 %m월 %d일"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
@@ -486,12 +215,12 @@
 <span>                                   rows <span class="op">=</span> <span class="va">사망</span> <span class="op">&gt;=</span> <span class="fl">154</span><span class="op">)</span><span class="op">)</span>  </span>
 <span></span>
 <span><span class="va">disaster_gt</span></span></code></pre></div>
-<div id="ynsntdltbt" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="uefmxnyrpt" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#ynsntdltbt .gt_table {
+#uefmxnyrpt .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -516,7 +245,7 @@
   border-left-color: #D3D3D3;
 }
 
-#ynsntdltbt .gt_heading {
+#uefmxnyrpt .gt_heading {
   background-color: #8F3018;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -528,7 +257,7 @@
   border-right-color: #D3D3D3;
 }
 
-#ynsntdltbt .gt_title {
+#uefmxnyrpt .gt_title {
   color: #FFFFFF;
   font-size: 20px;
   font-weight: initial;
@@ -540,7 +269,7 @@
   border-bottom-width: 0;
 }
 
-#ynsntdltbt .gt_subtitle {
+#uefmxnyrpt .gt_subtitle {
   color: #FFFFFF;
   font-size: 85%;
   font-weight: initial;
@@ -552,13 +281,13 @@
   border-top-width: 0;
 }
 
-#ynsntdltbt .gt_bottom_border {
+#uefmxnyrpt .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ynsntdltbt .gt_col_headings {
+#uefmxnyrpt .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -573,7 +302,7 @@
   border-right-color: #D3D3D3;
 }
 
-#ynsntdltbt .gt_col_heading {
+#uefmxnyrpt .gt_col_heading {
   color: #333333;
   background-color: #F7F7F7;
   font-size: 100%;
@@ -593,7 +322,7 @@
   overflow-x: hidden;
 }
 
-#ynsntdltbt .gt_column_spanner_outer {
+#uefmxnyrpt .gt_column_spanner_outer {
   color: #333333;
   background-color: #F7F7F7;
   font-size: 100%;
@@ -605,15 +334,15 @@
   padding-right: 4px;
 }
 
-#ynsntdltbt .gt_column_spanner_outer:first-child {
+#uefmxnyrpt .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ynsntdltbt .gt_column_spanner_outer:last-child {
+#uefmxnyrpt .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ynsntdltbt .gt_column_spanner {
+#uefmxnyrpt .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -625,7 +354,7 @@
   width: 100%;
 }
 
-#ynsntdltbt .gt_group_heading {
+#uefmxnyrpt .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -650,7 +379,7 @@
   vertical-align: middle;
 }
 
-#ynsntdltbt .gt_empty_group_heading {
+#uefmxnyrpt .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -665,15 +394,15 @@
   vertical-align: middle;
 }
 
-#ynsntdltbt .gt_from_md > :first-child {
+#uefmxnyrpt .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ynsntdltbt .gt_from_md > :last-child {
+#uefmxnyrpt .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ynsntdltbt .gt_row {
+#uefmxnyrpt .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -692,7 +421,7 @@
   overflow-x: hidden;
 }
 
-#ynsntdltbt .gt_stub {
+#uefmxnyrpt .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -705,7 +434,7 @@
   padding-right: 5px;
 }
 
-#ynsntdltbt .gt_stub_row_group {
+#uefmxnyrpt .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -719,11 +448,11 @@
   vertical-align: top;
 }
 
-#ynsntdltbt .gt_row_group_first td {
+#uefmxnyrpt .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ynsntdltbt .gt_summary_row {
+#uefmxnyrpt .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -733,16 +462,16 @@
   padding-right: 5px;
 }
 
-#ynsntdltbt .gt_first_summary_row {
+#uefmxnyrpt .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ynsntdltbt .gt_first_summary_row.thick {
+#uefmxnyrpt .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ynsntdltbt .gt_last_summary_row {
+#uefmxnyrpt .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -752,7 +481,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#ynsntdltbt .gt_grand_summary_row {
+#uefmxnyrpt .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -762,7 +491,7 @@
   padding-right: 5px;
 }
 
-#ynsntdltbt .gt_first_grand_summary_row {
+#uefmxnyrpt .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -772,11 +501,11 @@
   border-top-color: #D3D3D3;
 }
 
-#ynsntdltbt .gt_striped {
+#uefmxnyrpt .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ynsntdltbt .gt_table_body {
+#uefmxnyrpt .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -785,7 +514,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#ynsntdltbt .gt_footnotes {
+#uefmxnyrpt .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -799,7 +528,7 @@
   border-right-color: #D3D3D3;
 }
 
-#ynsntdltbt .gt_footnote {
+#uefmxnyrpt .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -808,7 +537,7 @@
   padding-right: 5px;
 }
 
-#ynsntdltbt .gt_sourcenotes {
+#uefmxnyrpt .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -822,7 +551,7 @@
   border-right-color: #D3D3D3;
 }
 
-#ynsntdltbt .gt_sourcenote {
+#uefmxnyrpt .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -830,64 +559,64 @@
   padding-right: 5px;
 }
 
-#ynsntdltbt .gt_left {
+#uefmxnyrpt .gt_left {
   text-align: left;
 }
 
-#ynsntdltbt .gt_center {
+#uefmxnyrpt .gt_center {
   text-align: center;
 }
 
-#ynsntdltbt .gt_right {
+#uefmxnyrpt .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ynsntdltbt .gt_font_normal {
+#uefmxnyrpt .gt_font_normal {
   font-weight: normal;
 }
 
-#ynsntdltbt .gt_font_bold {
+#uefmxnyrpt .gt_font_bold {
   font-weight: bold;
 }
 
-#ynsntdltbt .gt_font_italic {
+#uefmxnyrpt .gt_font_italic {
   font-style: italic;
 }
 
-#ynsntdltbt .gt_super {
+#uefmxnyrpt .gt_super {
   font-size: 65%;
 }
 
-#ynsntdltbt .gt_footnote_marks {
+#uefmxnyrpt .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#ynsntdltbt .gt_asterisk {
+#uefmxnyrpt .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ynsntdltbt .gt_indent_1 {
+#uefmxnyrpt .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ynsntdltbt .gt_indent_2 {
+#uefmxnyrpt .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ynsntdltbt .gt_indent_3 {
+#uefmxnyrpt .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ynsntdltbt .gt_indent_4 {
+#uefmxnyrpt .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ynsntdltbt .gt_indent_5 {
+#uefmxnyrpt .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1011,6 +740,134 @@
 
 # disaster_gt %&gt;% 
 #   gtsave(glue::glue("inst/extdata/figure/disaster_gt.png"))
+</div>
+<div class="section level2">
+<h2 id="대통령-임기와-재난">대통령 임기와 재난<a class="anchor" aria-label="anchor" href="#%EB%8C%80%ED%86%B5%EB%A0%B9-%EC%9E%84%EA%B8%B0%EC%99%80-%EC%9E%AC%EB%82%9C"></a>
+</h2>
+<p>재난 데이터(<code>disaster</code>)와 대통령 임기
+데이터(<code>terms</code>)를 결합하여 하나의 데이터로 제작한후 대통령
+임기 발생된 재난을 시각화하여 인사이트를 도출한다.</p>
+<div class="section level3">
+<h3 id="임기중-평균-재난">임기중 평균 재난<a class="anchor" aria-label="anchor" href="#%EC%9E%84%EA%B8%B0%EC%A4%91-%ED%8F%89%EA%B7%A0-%EC%9E%AC%EB%82%9C"></a>
+</h3>
+<p>재임기간 중 평균 재난 횟수를 내림차순으로 정리한다. 이를 통해
+재임기간동안 연평균 발생한 재난횟수를 비교할 수 있다.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">terms_disaster</span> <span class="op">&lt;-</span> <span class="va">terms</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">이름</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>재난횟수 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">disaster</span><span class="op">$</span><span class="va">날짜</span> <span class="op"><a href="https://lubridate.tidyverse.org/reference/within-interval.html" class="external-link">%within%</a></span> <span class="va">임기</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>재임기간 <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/as.duration.html" class="external-link">as.duration</a></span><span class="op">(</span><span class="va">임기</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="st">"years"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">임기</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>연도별평균재난횟수 <span class="op">=</span> <span class="va">재난횟수</span><span class="op">/</span><span class="va">재임기간</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc</a></span><span class="op">(</span><span class="va">연도별평균재난횟수</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">terms_disaster</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 13 × 6</span></span></span>
+<span><span class="co">#&gt;    이름   시작일     종료일     재임기간 재난횟수 연도별평균재난횟수</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 윤석열 2022-05-10 2022-10-31    0.476        1             2.10  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 김영삼 1993-02-25 1998-02-24    5.00         5             1.00  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 박정희 1962-03-22 1979-10-26   17.6          8             0.455 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 전두환 1980-08-16 1988-02-24    7.52         2             0.266 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 박근혜 2013-02-25 2017-05-09    4.20         1             0.238 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 김대중 1998-02-25 2003-02-24    5.00         1             0.200 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 이승만 1948-07-24 1960-04-27   11.8          1             0.085<span style="text-decoration: underline;">0</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 윤보선 1960-08-12 1962-03-22    1.61         0             0     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 최규하 1979-10-26 1980-08-16    0.808        0             0     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 노태우 1988-02-25 1993-02-24    5.00         0             0     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 노무현 2003-02-25 2008-02-24    5.00         0             0     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 이명박 2008-02-25 2013-02-24    5.00         0             0     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> 문재인 2017-05-10 2022-05-09    5.00         0             0</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="시각화-데이터">시각화 데이터<a class="anchor" aria-label="anchor" href="#%EC%8B%9C%EA%B0%81%ED%99%94-%EB%8D%B0%EC%9D%B4%ED%84%B0"></a>
+</h3>
+<p>임기내 재난 시각화를 위한 데이터를 제작한다.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">show_disaster</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">mask</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">disaster</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>mask <span class="op">=</span> <span class="va">mask</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">mask</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">disaster_terms_tbl</span> <span class="op">&lt;-</span> <span class="va">terms</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">이름</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>재난여부 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">disaster</span><span class="op">$</span><span class="va">날짜</span> <span class="op"><a href="https://lubridate.tidyverse.org/reference/within-interval.html" class="external-link">%within%</a></span> <span class="va">임기</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">이름</span>, <span class="va">시작일</span>, <span class="va">종료일</span>, <span class="va">재난여부</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>재난 <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">재난여부</span>, <span class="va">show_disaster</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">재난</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">이름</span>, <span class="va">시작일</span>, <span class="va">종료일</span>, 재난발생일 <span class="op">=</span> <span class="va">날짜</span>, <span class="va">사망</span>, <span class="va">참사내역</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="va">disaster_terms_tbl</span>  </span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 19 × 6</span></span></span>
+<span><span class="co">#&gt;    이름   시작일     종료일     재난발생일  사망 참사내역                       </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 이승만 1948-07-24 1960-04-27 1953-01-09   330 여객선 창경호 침몰             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 박정희 1962-03-22 1979-10-26 1963-01-18   138 여객선 연호 침몰               </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 박정희 1962-03-22 1979-10-26 1970-04-08    33 마포와우아파트붕괴             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 박정희 1962-03-22 1979-10-26 1970-12-15   323 여객선 남영호 침몰             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 박정희 1962-03-22 1979-10-26 1971-12-25   165 대연각호텔 화재                </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 박정희 1962-03-22 1979-10-26 1972-12-02    51 서울시민회관화재               </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 박정희 1962-03-22 1979-10-26 1974-02-22   157 해군YTL선 전복                 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 박정희 1962-03-22 1979-10-26 1974-11-03    88 청량리 대왕코너 화재           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 박정희 1962-03-22 1979-10-26 1977-11-11    59 이리역 열차폭발                </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 전두환 1980-08-16 1988-02-24 1983-09-01   269 대한항공 보잉747기 피격        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 전두환 1980-08-16 1988-02-24 1987-11-29   115 대한항공(KAL) 보잉 707기공중폭…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 김영삼 1993-02-25 1998-02-24 1993-10-10   292 여객선 서해훼리호 침몰         </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> 김영삼 1993-02-25 1998-02-24 1994-10-21    32 성수대교붕괴                   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> 김영삼 1993-02-25 1998-02-24 1995-04-28   101 대구지하철 1호선 도시가스·폭발 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> 김영삼 1993-02-25 1998-02-24 1995-06-29   502 삼풍백화점 붕괴                </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> 김영삼 1993-02-25 1998-02-24 1997-08-06   225 대한항공 B747-300기 괌 추락    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> 김대중 1998-02-25 2003-02-24 2003-02-18   192 대구시지하철 방화              </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span> 박근혜 2013-02-25 2017-05-09 2014-04-16   299 세월호 침몰                    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span> 윤석열 2022-05-10 2022-10-31 2022-10-29   154 이태원 압사</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/slowkow/ggrepel" class="external-link">ggrepel</a></span><span class="op">)</span></span>
+<span><span class="fu">extrafont</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/extrafont/man/loadfonts.html" class="external-link">loadfonts</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">disaster_terms_viz</span> <span class="op">&lt;-</span> <span class="va">disaster_terms_tbl</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="co"># 임기중 재난이 없었던 대통령 추가</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="va">terms</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>              <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">이름</span>, <span class="va">시작일</span>, <span class="va">종료일</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>              <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">이름</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"문재인"</span>, <span class="st">"노무현"</span>, <span class="st">"이명박"</span>, <span class="st">"윤보선"</span>, <span class="st">"최규하"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>정당 <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html" class="external-link">case_when</a></span><span class="op">(</span><span class="va">이름</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"윤보선"</span>, <span class="st">"김대중"</span>, <span class="st">"노무현"</span>, <span class="st">"문재인"</span><span class="op">)</span> <span class="op">~</span> <span class="st">"민주당계"</span>,</span>
+<span>                          <span class="va">이름</span> <span class="op">==</span> <span class="st">"최규하"</span> <span class="op">~</span> <span class="st">"무소속"</span>,</span>
+<span>                          <span class="cn">TRUE</span> <span class="op">~</span> <span class="st">"국민의힘계"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">disaster_terms_g</span> <span class="op">&lt;-</span> <span class="va">disaster_terms_viz</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>   </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">시작일</span>, y <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_reorder.html" class="external-link">fct_reorder</a></span><span class="op">(</span><span class="va">이름</span>, <span class="va">시작일</span><span class="op">)</span><span class="op">)</span> <span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_segment.html" class="external-link">geom_segment</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>xend <span class="op">=</span> <span class="va">종료일</span>, yend <span class="op">=</span> <span class="va">이름</span>, color <span class="op">=</span> <span class="va">정당</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/ggrepel/man/geom_text_repel.html" class="external-link">geom_label_repel</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">재난발생일</span>, y <span class="op">=</span> <span class="va">이름</span>, label <span class="op">=</span> <span class="va">참사내역</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>                     alpha <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>                     fill <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>                     min.segment.length <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>                     max.overlaps <span class="op">=</span> <span class="cn">Inf</span>,</span>
+<span>                     label.size <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>                     family <span class="op">=</span> <span class="st">"NanumBarunPen"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">재난발생일</span>, y <span class="op">=</span> <span class="va">이름</span>, size <span class="op">=</span> <span class="va">사망</span>, color <span class="op">=</span> <span class="va">정당</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_size.html" class="external-link">scale_size_continuous</a></span><span class="op">(</span>range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">theme_election</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">""</span>,</span>
+<span>         y <span class="op">=</span> <span class="st">""</span>,</span>
+<span>         title <span class="op">=</span> <span class="st">"대통령 정권기간별 대형 참사 연대기"</span>,</span>
+<span>         size <span class="op">=</span> <span class="st">"사망자수(명)"</span>,</span>
+<span>         caption <span class="op">=</span> <span class="st">"자료출처: 위키백과 대통령 재임기간, 해럴드경제/서울경제 뉴스기사"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"민주당계"</span> <span class="op">=</span> <span class="st">"blue"</span>,</span>
+<span>                                  <span class="st">"국민의힘계"</span> <span class="op">=</span> <span class="st">"red"</span>,</span>
+<span>                                  <span class="st">"무소속"</span> <span class="op">=</span> <span class="st">"gray10"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">disaster_terms_g</span></span>
+<span><span class="co">#&gt; Warning: Removed 5 rows containing missing values (geom_label_repel).</span></span>
+<span><span class="co">#&gt; Warning: Removed 5 rows containing missing values (geom_point).</span></span></code></pre></div>
+<p><img src="disaster_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span>    </span>
+<span><span class="co"># ggsave( glue::glue("inst/extdata/figure/disaster_terms_g.png") , </span></span>
+<span><span class="co">#       disaster_terms_g,</span></span>
+<span><span class="co">#       device = ragg::agg_png, </span></span>
+<span><span class="co">#       width = 250, height = 176, units = "mm", res = 600) </span></span></code></pre></div>
 </div>
 </div>
   </div>

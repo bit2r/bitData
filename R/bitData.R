@@ -181,3 +181,45 @@ NULL
 #'}
 #' @details Seoul R Meetup 워크샵에서 참여자들이 직접 제출한 데이터
 "exam_score"
+
+#' @title 대한민국 참사 데이터
+#' @description 대한민국 건국이후 참사에 대한 기록
+#' @format 19개 대형참사에 대한 3가지 변수를 갖는 데이터프레임:
+#' \describe{
+#'   \item{\code{날짜}}{date 참사발생일자}
+#'   \item{\code{사망}}{double 사망/희생자 수}
+#'   \item{\code{참사내역}}{character 참사 명칭} #'}
+#' @details 헤럴드경제 뉴스기사(2014)와 10.29 참사(이태원) 서울경제 실린 참사 데이터
+#' @source 헤럴드 경제, [데이터랩] 역대 대형참사…최악은 502명 사망 삼풍 붕괴 \url{http://news.heraldcorp.com/view.php?ud=20140417000274}
+#' @source 서울경제, 성수대교 붕괴서 이태원 압사까지…잊을만 하면 터지는 '후진국형 대형참사' \url{https://www.sedaily.com/NewsView/26CJW8PC06}
+"disaster"
+
+#' @title 자연재해 태풍 희생자
+#' @description 대한민국을 강타해서 많은 희생자가 발생한 태풍 기록
+#' @format 10개 태풍에 대한 5개 변수를 갖는 데이터프레임:
+#' \describe{
+#'   \item{\code{시작일}}{date 태풍 영향 시작일자}
+#'   \item{\code{종료일}}{date 태풍 영향 종료일자}
+#'   \item{\code{사망}}{double 태풍으로 인한 인명피해(명)}
+#'   \item{\code{태풍명}}{character 태풍명칭}
+#'   \item{\code{지속일수}}{double 한반도에 태풍이 영향을 미친 일수}
+#'}
+#' @details 한반도를 강타한 대표적인 자연재해 태풍으로 인한 희생자수와 태풍 주요 기록
+#' @source 나무위키 태풍/대한민국/각종 기록 순위 \url{https://namu.wiki/w/태풍/대한민국/각종 기록 순위}
+"typhoon"
+
+#' @title 대한민국 대통령 재임기간
+#' @description 역대 대통령 재임기간
+#' @format 대통령 13명에 대한 5개 변수를 갖는 데이터프레임:
+#' \describe{
+#'   \item{\code{이름}}{character 대통령 이름}
+#'   \item{\code{시작일}}{date 대통령 임기 시작일}
+#'   \item{\code{종료일}}{date 대통령 임기 종료일}
+#'   \item{\code{임기}}{interval 재임기간}
+#'   \item{\code{재임기간}}{double 재임기간 년도숫자 표시}
+#'}
+#' @details 해방이후 대한민국 대통령 재임기간을 시작일, 종료일, 임기, 재임기간(년도)로 기록
+#' @source 위키백과 대한민국의 대통령 목록 \url{https://ko.wikipedia.org/wiki/대한민국의_대통령_목록}
+"terms"
+
+

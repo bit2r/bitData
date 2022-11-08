@@ -62,7 +62,6 @@ big_disaster <- big_disaster_raw %>%
 
 big_disaster
 
-
 ## 2.3. 자연재해연보(행정안전부) -------------
 # https://www.mois.go.kr/frt/bbs/type001/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000014&nttId=89542
 
@@ -77,7 +76,7 @@ nature_tbl <- nature_raw %>%
 
 nature_tbl
 
-## 2.4. 해럴드경제 뉴스(2014) -------------
+## 2.4. 헤럴드경제 뉴스(2014) -------------
 # http://news.heraldcorp.com/view.php?ud=20140417000274
 
 herald_raw <- read_lines("data-raw/herald_news_disaster.txt")
@@ -100,11 +99,11 @@ herald_tbl
 ## 2.5. 태풍 인명피해(나무위키) -------------
 # https://namu.wiki/w/%ED%83%9C%ED%92%8D/%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD/%EA%B0%81%EC%A2%85%20%EA%B8%B0%EB%A1%9D%20%EC%88%9C%EC%9C%84
 
-typoon_raw <- read_html("https://namu.wiki/w/%ED%83%9C%ED%92%8D/%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD/%EA%B0%81%EC%A2%85%20%EA%B8%B0%EB%A1%9D%20%EC%88%9C%EC%9C%84",
+typhoon_raw <- read_html("https://namu.wiki/w/%ED%83%9C%ED%92%8D/%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD/%EA%B0%81%EC%A2%85%20%EA%B8%B0%EB%A1%9D%20%EC%88%9C%EC%9C%84",
                         encoding = 'utf-8') %>%
   html_elements('table')
 
-typoon_tbl <- typoon_raw %>%
+typhoon_tbl <- typhoon_raw %>%
   html_table() %>%
   .[[1]] %>%
   slice(3:n()) %>%
@@ -114,7 +113,55 @@ typoon_tbl <- typoon_raw %>%
   select(시작일, 종료일, 사망, 태풍명 = X4) %>%
   mutate(기간 = lubridate::interval(시작일, 종료일)) %>%
   mutate(지속일수 = lubridate::as.duration(기간) %>% as.numeric("days")) %>%
-  select(-기간)
+  select(-기간) %>%
+  arrange(시작일)
 
-typoon_tbl
+# 3. 데이터 가공 ---------------------
+## 3.1. 참사 데이터 ----------------------------
+
+disaster_tbl <- big_disaster %>%
+  filter(날짜 >= as.Date("2014-01-01")) %>%
+  bind_rows(herald_tbl) %>%
+  select(-부상) %>%
+  arrange(날짜)
+
+disaster_tbl
+
+## 3.2. 태풍 데이터 ----------------------------
+
+typhoon_tbl
+
+
+# 4. 내보내기 ---------------------
+## 4.1. 참사데이터 (헤럴드+서울경제 ----)
+disaster <- clean_varnames(disaster_tbl)
+write_csv(disaster, here::here("data-raw", "disaster.csv"))
+
+## 4.2. 태풍데이터 (나무위키)
+typhoon <- clean_varnames(typhoon_tbl)
+write_csv(typhoon, here::here("data-raw", "typhoon.csv"))
+
+# 5. 문서화 -----------------------
+## 5.1. 참사데이터 (헤럴드+서울경제 ----)
+# sinew::makeOxygen(disaster)
+usethis::use_data(disaster, overwrite = TRUE, compress = 'xz')
+
+## 5.2. 태풍데이터 (나무위키)
+# sinew::makeOxygen(typhoon)
+usethis::use_data(typhoon, overwrite = TRUE, compress = 'xz')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

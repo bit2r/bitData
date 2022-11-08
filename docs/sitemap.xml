@@ -40,6 +40,9 @@
     <loc>/reference/co2.html</loc>
   </url>
   <url>
+    <loc>/reference/disaster.html</loc>
+  </url>
+  <url>
     <loc>/reference/exam_score.html</loc>
   </url>
   <url>
@@ -68,5 +71,11 @@
   </url>
   <url>
     <loc>/reference/pr_month.html</loc>
+  </url>
+  <url>
+    <loc>/reference/terms.html</loc>
+  </url>
+  <url>
+    <loc>/reference/typhoon.html</loc>
   </url>
 </urlset>
