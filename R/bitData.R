@@ -1,9 +1,11 @@
-#' bitData
+#' bitData: 통계(데이터 과학) 데이터 모음집
 #'
-#' @name bitData
-#' @docType package
-#' @import dplyr tibble purrr tidyr readr jsonlite
-NULL
+#' 오픈 통계 패키지와 통계(데이터 과학) 한국 데이터 모음
+#'
+#' @import dplyr tibble tidyr readr
+#' @importFrom purrr map map_dbl possibly safely
+#' @importFrom jsonlite fromJSON toJSON
+"_PACKAGE"
 
 #' @title 국방부 공군 남녀 신체측정 데이터
 #' @description 공군 장병 초도 보급을 위한 3차원 전신스캐너 운영에 따른 계측값 데이터. 1년동안 운영된 체형측정정보이며 3차원 스캐너의 정확성의 부족으로 실제 개인의 인체 정보와는 다소 차이가 존재함.
@@ -41,19 +43,22 @@ NULL
 #' 남극 파머 연구소 인근 펭귄 측정 데이터
 #'
 #' 남극 파머 연구소 인근 서식하고 있는 성체 펭귄을 관측한 데이터로
-#' 펭귄종, 파머 제도 서식섬, 측정크기(물갈퀴 길이, 체중, 부리 길이와 깊이), 성별에
+#' 펭귄종, 파머 제도 서식섬, 측정크기(날개 길이, 체중, 부리 길이와 깊이), 성별에
 #' 대한 정보가 포함되어 있다.
 #'
+#' @format 344개 관측점과 8개 변수를 갖는 데이터프레임:
 #' \describe{
 #'   \item{\code{종명칭}}{factor 펭귄종 명칭 ("아델리", "젠투", "턱끈")}
 #'   \item{\code{섬이름}}{factor 남극 파머 제도 섬이름 ("드림", "비스코", "토르거센")}
-#'   \item{\code{부리_길이}}{double 부리 길이 (밀리미터)}
-#'   \item{\code{부리_깊이}}{double 부리 깊이 (밀리미터)}
-#'   \item{\code{물갈퀴_길이}}{integer 물갈퀴 길이 (밀리미터)}
-#'   \item{\code{체중}}{integer 체중 (그램)}
-#'   \item{\code{성별}}{factor 성별 (수컷, 암컷)}
-#'   \item{\code{연도}}{integer 측정 연도 (2007, 2008, or 2009)}
+#'   \item{\code{부리_길이}}{double 부리 길이 (밀리미터), 2개 NA 포함}
+#'   \item{\code{부리_깊이}}{double 부리 깊이 (밀리미터), 2개 NA 포함}
+#'   \item{\code{날개_길이}}{integer 날개 길이 (밀리미터), flipper length, 2개 NA 포함}
+#'   \item{\code{체중}}{integer 체중 (그램), 2개 NA 포함}
+#'   \item{\code{성별}}{factor 성별 (수컷, 암컷), 11개 NA 포함}
+#'   \item{\code{연도}}{integer 측정 연도 (2007, 2008, 2009)}
 #' }
+#' @details 원본 palmerpenguins 패키지의 데이터를 한글로 번역한 버전입니다.
+#' 일부 관측치에서 측정값이 누락되어 NA가 포함되어 있습니다 (총 11개 행에 NA 존재).
 #' @source {Horst AM, Hill AP, Gorman KB (2020). palmerpenguins: Palmer Archipelago (Antarctica) penguin data. R package version 0.1.0.} \doi{10.5281/zenodo.3960218}
 #' @source \url{https://allisonhorst.github.io/palmerpenguins/}
 #' @source {Adélie penguins: Palmer Station Antarctica LTER and K. Gorman. 2020. Structural size measurements and isotopic signatures of foraging among adult male and female Adélie penguins (Pygoscelis adeliae) nesting along the Palmer Archipelago near Palmer Station, 2007-2009 ver 5. Environmental Data Initiative.} \doi{10.6073/pasta/98b16d7d563f265cb52372c8ca99e60f}
@@ -238,3 +243,5 @@ NULL
 #' @details 봉담고등학교 강우혁 선생님이 봉담고 설문을 통해 확보하여 개인정보를 삭제한 후 등교정보를 담고 있는 데이터셋이다.
 #' 봉담고에 재학중인 2학년 284명이 주말과 공휴일을 제외한 2022년 9월부터 10월까지 등교 정보를 담고 있다.
 "school"
+
+# NOTE: korean_war와 military_stat 문서는 데이터 생성 후 추가 예정

@@ -6,6 +6,12 @@
 # 국방부_공군 신체측정정보(남): https://www.data.go.kr/data/15090354/fileData.do
 # 국방부_공군 신체측정정보(여): https://www.data.go.kr/data/15090359/fileData.do
 ################################################################# ---
+# NOTE: 이 스크립트는 데이터를 생성하므로 수동으로 실행해야 합니다.
+# devtools::document() 시에는 실행되지 않도록 조건부 처리되어 있습니다.
+
+# 패키지 로딩 시에는 실행하지 않음
+if (FALSE) {
+
 
 # 1. 패키지 -------------
 
@@ -48,3 +54,5 @@ write_rds(airforce_meta, here::here("data-raw", "airforce_meta.rds"))
 
 usethis::use_data(airforce, overwrite = TRUE, compress = 'xz')
 
+
+}  # end of if (FALSE)

@@ -1,3 +1,10 @@
-^korData\.Rproj$
+^bitData\.Rproj$
 ^\.Rproj\.user$
 ^LICENSE\.md$
+^data-raw$
+^docs$
+^pkgdown$
+^README\.Rmd$
+^README\.html$
+^\.DS_Store$
+^\.claude$

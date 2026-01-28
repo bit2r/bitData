@@ -5,6 +5,12 @@
 ##                최종수정일: 2022-10-31
 ##
 ################################################################# ---
+# NOTE: 이 스크립트는 데이터를 생성하므로 수동으로 실행해야 합니다.
+# devtools::document() 시에는 실행되지 않도록 조건부 처리되어 있습니다.
+
+# 패키지 로딩 시에는 실행하지 않음
+if (FALSE) {
+
 
 # 1. 패키지 -------------
 
@@ -46,7 +52,7 @@ preside_14_tbl
 ## 2.2. 서울경제 -------------
 # https://www.sedaily.com/NewsView/26CJW8PC06
 
-library(DataEditR)
+# library(DataEditR)  # 개발용 패키지
 
 # data_edit()
 big_disaster_raw <- tribble(
@@ -165,3 +171,5 @@ usethis::use_data(typhoon, overwrite = TRUE, compress = 'xz')
 
 
 
+
+}  # end of if (FALSE)

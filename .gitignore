@@ -1,3 +1,13 @@
 .Rproj.user
 inst/doc
 inst/extdata/chip_dataset.csv
+.Rhistory
+.RData
+.Rdata
+*.tar.gz
+*.Rcheck/
+.httr-oauth
+*.o
+*.so
+*.dll
+README.html

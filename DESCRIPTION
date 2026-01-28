@@ -3,15 +3,37 @@ Title: 통계(데이터 과학) 데이터 모음집
 Version: 0.0.2.9000
 Authors@R: 
     person("Kwangchun", "Lee", , "kwangchun.lee.7@gmail.com", role = c("aut", "cre"))
-Description: 오픈 통계 패키지와 통계(데이터 과학) 한국 데이터 모음
+Description: 오픈 통계 패키지와 통계(데이터 과학) 한국 데이터 모음을 제공합니다.
+    통계 대중화와 디지털 불평등 해소를 위해 누구나 쉽게 사용할 수 있는
+    한국 관련 데이터셋을 포함하고 있습니다.
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.1
-Depends: 
-    R (>= 2.10)
+RoxygenNote: 7.3.2
+Depends:
+    R (>= 3.5)
 LazyData: true
-Suggests: 
+Imports:
+    dplyr,
+    jsonlite,
+    purrr,
+    readr,
+    stringi,
+    tibble,
+    tidyr
+Suggests:
+    fs,
+    geosphere,
+    here,
+    httr,
+    janitor,
     knitr,
-    rmarkdown
+    lubridate,
+    palmerpenguins,
+    readxl,
+    rmarkdown,
+    rvest,
+    usethis
 VignetteBuilder: knitr
+URL: https://bit2r.github.io/bitData/, https://github.com/bit2r/bitData
+BugReports: https://github.com/bit2r/bitData/issues

@@ -5,6 +5,11 @@
 ##                최종수정일: 2022-09-01
 ## Palmer Penguins 데이터셋: https://github.com/allisonhorst/palmerpenguins
 ################################################################# ---
+# NOTE: 이 스크립트는 데이터를 생성하므로 수동으로 실행해야 합니다.
+# devtools::document() 시에는 실행되지 않도록 조건부 처리되어 있습니다.
+
+# 패키지 로딩 시에는 실행하지 않음
+if (FALSE) {
 
 # 1. 패키지 -------------
 
@@ -20,12 +25,14 @@ penguins_eng <- palmerpenguins::penguins
 
 penguins <- penguins_eng %>%
   # 영어 변수명 한글 변환
-  set_names(c("종명칭", "섬이름", "부리_길이", "부리_깊이", "물갈퀴_길이",
+  set_names(c("종명칭", "섬이름", "부리_길이", "부리_깊이", "날개_길이",
               "체중", "성별", "연도")) %>%
-  # 결측값 제거
-  drop_na() %>%
-  # 영어 값 한글 값으로 변환
-  mutate(성별 = ifelse(성별 == "male", "수컷", "암컷"),
+  # 영어 값 한글 값으로 변환 (NA는 유지)
+  mutate(성별 = case_when(
+           성별 == "male" ~ "수컷",
+           성별 == "female" ~ "암컷",
+           TRUE ~ NA_character_
+         ),
          섬이름 = case_when( str_detect(섬이름, "Biscoe") ~ "비스코",
                           str_detect(섬이름, "Dream") ~ "드림",
                           str_detect(섬이름, "Torgersen") ~ "토르거센"),
@@ -49,4 +56,6 @@ write_csv(penguins, here::here("data-raw", "penguins.csv"))
 # sinew::makeOxygen(penguins)
 
 usethis::use_data(penguins, overwrite = TRUE, compress = 'xz')
+
+}  # end of if (FALSE)
 
